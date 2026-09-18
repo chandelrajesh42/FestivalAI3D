@@ -13,13 +13,9 @@
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col justify-between">
 
-    <!-- TOP BANNER AD (Monetag Banner Ad Code Yahan Paste Karein) -->
-    <div class="w-full bg-gray-200 py-2 text-center text-xs text-gray-500 border-b">
-        <!-- Monetag Top Banner Script Start -->
-        <div id="monetag-top-banner">
-            [ Monetag Top Banner Ad Code Here ]
-        </div>
-        <!-- Monetag Top Banner Script End -->
+    <!-- TOP BANNER AD -->
+    <div class="w-full bg-white py-1 text-center border-b shadow-sm">
+        <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
 
     <!-- Main Container -->
@@ -28,15 +24,11 @@
             <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 Festival Photo Maker</h1>
             <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur tyohar ki shandar photo banayein!</p>
 
-            <!-- Festival Selector -->
+            <!-- Festival Selector (Auto Calendar) -->
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Tyohar Chunein (Select Festival):</label>
                 <select id="festivalSelect" class="w-full p-2.5 border rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-red-500 outline-none">
-                    <option value="diwali">🪔 Diwali</option>
-                    <option value="holi">🎨 Holi</option>
-                    <option value="rakhi">🧵 Raksha Bandhan</option>
-                    <option value="independence">🇮🇳 Independence Day</option>
-                    <option value="newyear">🎆 New Year</option>
+                    <!-- Yeh automatically date ke hisab se update hoga -->
                 </select>
             </div>
 
@@ -65,29 +57,78 @@
         </div>
     </main>
 
-    <!-- BOTTOM BANNER AD (Monetag Banner Ad Code Yahan Paste Karein) -->
-    <div class="w-full bg-gray-200 py-2 text-center text-xs text-gray-500 border-t mt-auto">
-        <!-- Monetag Bottom Banner Script Start -->
-        <div id="monetag-bottom-banner">
-            [ Monetag Bottom Banner Ad Code Here ]
-        </div>
-        <!-- Monetag Bottom Banner Script End -->
+    <!-- BOTTOM BANNER AD -->
+    <div class="w-full bg-white py-1 text-center border-t shadow-sm mt-auto">
+        <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Logic & Calendar System -->
     <script>
-        // Festival backgrounds and themes data
-        const festivalThemes = {
-            diwali: { title: "Happy Diwali", bgGradient: ["#ff9933", "#cc0000"], textColor: "#fff", subText: "Shubh Deepawali" },
-            holi: { title: "Happy Holi", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff", subText: "Rangon Ka Tyohar" },
-            rakhi: { title: "Happy Raksha Bandhan", bgGradient: ["#002db3", "#3399ff"], textColor: "#fff", subText: "Bhai-Behan ka Pyar" },
-            independence: { title: "Happy Independence Day", bgGradient: ["#ff9933", "#ffffff", "#138808"], textColor: "#000", subText: "Jai Hind 🇮🇳" },
-            newyear: { title: "Happy New Year", bgGradient: ["#000000", "#434343"], textColor: "#ffd700", subText: "Naye Saal ki Shubhkamnayein" }
-        };
+        // Indian Festivals Database with Start & End Dates
+        const festivalsData = [
+            { id: "gandhijayanti", name: " gandhi Jayanti", start: "2026-10-02", end: "2026-10-02", title: "Gandhi Jayanti", subText: "Rashtriya Pita ko Naman", bgGradient: ["#ff9933", "#138808"], textColor: "#fff" },
+            { id: "dussehra", name: "🏹 Dussehra (Vijayadashami)", start: "2026-10-20", end: "2026-10-20", title: "Happy Dussehra", subText: "Asatya par Satya ki Jeet", bgGradient: ["#cc0000", "#ff9933"], textColor: "#fff" },
+            { id: "diwali", name: "🪔 Diwali (Deepawali)", start: "2026-11-08", end: "2026-11-09", title: "Happy Diwali", subText: "Shubh Deepawali", bgGradient: ["#ff9933", "#cc0000"], textColor: "#fff" },
+            { id: "bhaidooj", name: "🎁 Bhai Dooj", start: "2026-11-10", end: "2026-11-10", title: "Happy Bhai Dooj", subText: "Bhai-Behan ka Prem", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" },
+            { id: "gurunanak", name: "🪯 Guru Nanak Jayanti", start: "2026-11-24", end: "2026-11-24", title: "Guru Nanak Jayanti", subText: "Gurpurab ki Shubhkamnayein", bgGradient: ["#002db3", "#3399ff"], textColor: "#fff" },
+            { id: "christmas", name: "🎄 Christmas", start: "2026-12-25", end: "2026-12-25", title: "Merry Christmas", subText: "Joy to the World", bgGradient: ["#cc0000", "#138808"], textColor: "#fff" },
+            { id: "newyear", name: "🎆 New Year", start: "2027-01-01", end: "2027-01-01", title: "Happy New Year 2027", subText: "Naye Saal ki Shubhkamnayein", bgGradient: ["#000000", "#434343"], textColor: "#ffd700" },
+            { id: "republic", name: "🇮🇳 Republic Day", start: "2027-01-26", end: "2027-01-26", title: "Republic Day", subText: "Jai Hind 🇮🇳", bgGradient: ["#ff9933", "#138808"], textColor: "#000" },
+            { id: "holi", name: "🎨 Holi", start: "2027-03-24", end: "2027-03-25", title: "Happy Holi", subText: "Rangon Ka Tyohar", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" }
+        ];
 
+        // Automatic Festival Filter (1 din pehle se shuru aur ant tak dikhega)
+        function loadActiveFestivals() {
+            const select = document.getElementById("festivalSelect");
+            select.innerHTML = "";
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
+            let activeCount = 0;
+
+            festivalsData.forEach(f => {
+                let startDate = new Date(f.start);
+                let endDate = new Date(f.end);
+                
+                // 1 din pehle active karne ke liye
+                let showStartDate = new Date(startDate);
+                showStartDate.setDate(showStartDate.getDate() - 1);
+                showStartDate.setHours(0,0,0,0);
+
+                endDate.setHours(23,59,59,999);
+
+                if (today >= showStartDate && today <= endDate) {
+                    let opt = document.createElement("option");
+                    opt.value = f.id;
+                    opt.textContent = f.name;
+                    select.appendChild(opt);
+                    activeCount++;
+                }
+            });
+
+            // Agar aaj ke din koi active tyohar nahi hai, toh testing ke liye saare aane wale tyohar dikha do taaki dropdown khali na rahe
+            if (activeCount === 0) {
+                festivalsData.forEach(f => {
+                    let opt = document.createElement("option");
+                    opt.value = f.id;
+                    opt.textContent = f.name + " (" + f.start + ")";
+                    select.appendChild(opt);
+                });
+            }
+        }
+
+        // Page load hote hi calendar check karega
+        window.onload = loadActiveFestivals;
+
+        // Monetag Popunder Popup Ad Trigger on Button Click
         function triggerMonetagPopup() {
-            // Yahan aap apna Monetag Popunder / Interstitial Ad script paste kar sakte hain.
-            console.log("Monetag Popup Ad Triggered!");
+            if (!window.popunderLoaded) {
+                const s = document.createElement('script');
+                s.dataset.zone = '11829758';
+                s.src = 'https://al5sm.com/tag.min.js';
+                document.body.appendChild(s);
+                window.popunderLoaded = true;
+            }
         }
 
         function generatePhoto() {
@@ -102,15 +143,16 @@
             // 1. Popup Ad Triggered on Click
             triggerMonetagPopup();
 
+            // Find selected festival theme data
+            const theme = festivalsData.find(f => f.id === festivalKey) || festivalsData[0];
+
             // 2. Canvas Rendering
             const canvas = document.getElementById("photoCanvas");
             const ctx = canvas.getContext("2d");
-            const theme = festivalThemes[festivalKey];
 
             // Background Gradient Draw karein
             let gradient = ctx.createLinearGradient(0, 0, 0, 500);
-            if(festivalKey === 'independence') {
-                gradient = ctx.createLinearGradient(0, 0, 0, 500);
+            if(festivalKey === 'republic' || festivalKey === 'gandhijayanti') {
                 gradient.addColorStop(0, "#ff9933");
                 gradient.addColorStop(0.5, "#ffffff");
                 gradient.addColorStop(1, "#138808");
@@ -128,8 +170,8 @@
             ctx.strokeRect(10, 10, 480, 480);
 
             // Festival Title
-            ctx.fillStyle = festivalKey === 'independence' ? '#000' : theme.textColor;
-            ctx.font = "bold 36px sans-serif";
+            ctx.fillStyle = (festivalKey === 'republic') ? '#000' : theme.textColor;
+            ctx.font = "bold 34px sans-serif";
             ctx.textAlign = "center";
             ctx.fillText(theme.title, 250, 120);
 
