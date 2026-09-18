@@ -3,223 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>भारतीय त्योहार विशिंग साइट - नाम वाली फोटो बनाएं</title>
+    <title>All Indian Festival Photo Maker</title>
     
-    <!-- Monetag Meta Verification (आपके पुराने कोड से) -->
-    <meta name="monetag" content="10756784d5df68d9f10da955677d2a58">
+    <!-- Monetag Verification Meta Tag -->
+    <meta name="monetag" content="f17ed5532ceba8d5beaf3548acd6ea90">
 
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f6f9;
-            text-align: center;
-            color: #333;
-        }
-        header {
-            background: linear-gradient(135deg, #ff9933, #ffffff, #128807);
-            padding: 25px 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        header h1 {
-            margin: 0;
-            font-size: 26px;
-            color: #d84315;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
-        }
-        header p {
-            margin: 5px 0 0 0;
-            font-weight: bold;
-            color: #333;
-        }
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 15px;
-        }
-        /* Banner Ad Container Styles */
-        .ad-container {
-            margin: 20px auto;
-            padding: 5px;
-            max-width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .form-section {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #555;
-        }
-        select, input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            outline: none;
-            transition: 0.3s;
-        }
-        select:focus, input[type="text"]:focus {
-            border-color: #ff9933;
-        }
-        .gen-btn {
-            background: linear-gradient(135deg, #ff9933, #ff5500);
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 4px 10px rgba(255, 85, 0, 0.3);
-            transition: 0.2s;
-        }
-        .gen-btn:hover {
-            transform: translateY(-2px);
-        }
-        .hidden {
-            display: none !important;
-        }
-        #resultSection {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-top: 20px;
-        }
-        canvas {
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
-        .share-btn {
-            background-color: #25D366;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 14px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-    </style>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-slate-100 min-h-screen flex flex-col justify-between">
 
-    <header>
-        <h1>✨ भारतीय त्योहार विशिंग मेकर ✨</h1>
-        <p>अपना नाम लिखें और शुभकामनाओं वाली शानदार फोटो बनाएं</p>
-    </header>
+    <!-- TOP BANNER AD (Fixed with safe top spacing) -->
+    <div class="w-full bg-white py-1 text-center border-b shadow-sm fixed top-0 z-50">
+        <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    </div>
 
-    <div class="container">
-        <!-- 1. TOP BANNER AD (Zone 8932402) -->
-        <div class="ad-container">
-            <script data-cfasync="false" async src="//://al5sm.com"></script>
-        </div>
+    <!-- Main Container with top padding -->
+    <main class="max-w-md mx-auto w-full p-4 pt-16 flex-grow">
+        <div class="bg-white rounded-2xl shadow-xl p-5 mb-6">
+            <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 Indian Festival Photo Maker</h1>
+            <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur tyohar ki shandar photo banayein!</p>
 
-        <!-- इनपुट फॉर्म सेक्शन -->
-        <div class="form-section">
-            <div class="form-group">
-                <label for="festivalSelect">🚩 त्योहार या नवरात्रि का दिन चुनें:</label>
-                <select id="festivalSelect">
-                    <!-- नवरात्रि के पूरे 9 दिन -->
-                    <option value="navratri1">🚩 नवरात्रि दिन 1: मां शैलपुत्री</option>
-                    <option value="navratri2">🚩 नवरात्रि दिन 2: मां ब्रह्मचारिणी</option>
-                    <option value="navratri3">🚩 नवरात्रि दिन 3: मां चंद्रघंटा</option>
-                    <option value="navratri4">🚩 नवरात्रि दिन 4: मां कुष्मांडा</option>
-                    <option value="navratri5">🚩 नवरात्रि दिन 5: मां स्कंदमाता</option>
-                    <option value="navratri6">🚩 नवरात्रि दिन 6: मां कात्यायनी</option>
-                    <option value="navratri7">🚩 नवरात्रि दिन 7: मां कालरात्रि</option>
-                    <option value="navratri8">🚩 नवरात्रि दिन 8: मां महागौरी (महा अष्टमी)</option>
-                    <option value="navratri9">🚩 नवरात्रि दिन 9: मां सिद्धिदात्री (महानवमी)</option>
-                    
-                    <!-- अन्य मुख्य त्योहार -->
-                    <option value="dussehra">🏹 विजयदशमी (दशहरा)</option>
-                    <option value="karwa">🌙 करवा चौथ</option>
-                    <option value="diwali" selected>🪔 दीपावली (Diwali)</option>
-                    <option value="bhaidooj">👫 भाई दूज</option>
-                    <option value="chhath">☀️ छठ पूजा</option>
-                    <option value="gurunanak">☬ गुरु नानक जयंती</option>
-                    <option value="christmas">🎄 मैरी क्रिसमस</option>
-                    <option value="newyear">🎆 नया साल (Happy New Year)</option>
-                    <option value="lohri">🔥 लोहड़ी</option>
-                    <option value="makarsankranti">🪁 मकर संक्रांति</option>
-                    <option value="republic">🇮🇳 गणतंत्र दिवस (26 जनवरी)</option>
-                    <option value="shivratri">🔱 महाशिवरात्रि</option>
-                    <option value="holi">🎨 होली की हार्दिक बधाई</option>
-                    <option value="rakhi">🛡️ रक्षाबंधन</option>
-                    <option value="janmashtami">👑 कृष्ण जन्माष्टमी</option>
-                    <option value="ganesh">🐘 गणेश चतुर्थी</option>
-                    <option value="eid">🌙 ईद मुबारक</option>
+            <!-- Festival Selector (Auto Calendar) -->
+            <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Tyohar Chunein (Select Festival):</label>
+                <select id="festivalSelect" class="w-full p-2.5 border rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-red-500 outline-none">
+                    <!-- Yeh automatically date ke hisab se update hoga -->
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="userName">✍️ अपना नाम दर्ज करें:</label>
-                <input type="text" id="userName" placeholder="यहाँ अपना नाम लिखें..." maxlength="25">
+            <!-- User Name Input -->
+            <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Aapka Naam (Your Name):</label>
+                <input type="text" id="userName" placeholder="Jaise: Rajesh Kumar" class="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none">
             </div>
 
-            <button class="gen-btn" onclick="generatePhoto()">✨ फोटो बनाएं</button>
-        </div>
-
-        <!-- रिजल्ट और प्रीव्यू सेक्शन -->
-        <div id="resultSection" class="hidden">
-            <h3>👇 आपकी बधाई फोटो तैयार है 👇</h3>
-            <canvas id="photoCanvas" width="500" height="500"></canvas>
-            
-            <button class="share-btn" onclick="sharePhotoWithAd()">
-                🟢 व्हाट्सएप पर शेयर करें
+            <!-- Create Photo Button -->
+            <button onclick="generatePhoto()" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-200 text-sm">
+                ✨ Photo Banayein
             </button>
         </div>
 
-        <!-- 2. BOTTOM BANNER AD (Zone 8932405) -->
-        <div class="ad-container">
-            <script data-cfasync="false" async src="//://al5sm.com"></script>
+        <!-- Preview & Share Section -->
+        <div id="resultSection" class="bg-white rounded-2xl shadow-xl p-5 hidden text-center">
+            <h2 class="text-md font-semibold text-gray-700 mb-3">Aapki Photo Taiyar Hai! 👇</h2>
+            <div class="flex justify-center mb-4">
+                <!-- Canvas for Generating Image -->
+                <canvas id="photoCanvas" width="500" height="500" class="w-full max-w-[300px] rounded-lg shadow border"></canvas>
+            </div>
+            
+            <!-- Share & Download Buttons -->
+            <div class="space-y-3">
+                <button onclick="sharePhotoWithAd()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md text-sm transition duration-200 flex items-center justify-center gap-2">
+                    📤 WhatsApp Par Photo Share Karein
+                </button>
+                <a id="downloadBtn" download="festival-greeting.png" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg shadow-md text-sm transition duration-200 text-center">
+                    📥 Photo Download Karein
+                </a>
+            </div>
         </div>
+    </main>
+
+    <!-- BOTTOM BANNER AD -->
+    <div class="w-full bg-white py-1 text-center border-t shadow-sm mt-auto">
+        <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
 
-    <!-- जावासक्रिप्ट लॉजिक -->
+    <!-- JavaScript Logic & Calendar System -->
     <script>
-        // सभी त्योहारों का डेटा (आपके पुराने कोड और नई लिस्ट का मिक्स)
-        const festivalsData = {
-            navratri1: { title: "मां शैलपुत्री", subText: "शारदीय नवरात्रि - प्रथम दिन", bgGradient: ["#ff9933", "#ff3300"], textColor: "#fff" },
-            navratri2: { title: "मां ब्रह्मचारिणी", subText: "शारदीय नवरात्रि - द्वितीय दिन", bgGradient: ["#00cc99", "#006644"], textColor: "#fff" },
-            navratri3: { title: "मां चंद्रघंटा", subText: "शारदीय नवरात्रि - तृतीय दिन", bgGradient: ["#ffcc00", "#996600"], textColor: "#fff" },
-            navratri4: { title: "मां कुष्मांडा", subText: "शारदीय नवरात्रि - चतुर्थ दिन", bgGradient: ["#ff6600", "#cc3300"], textColor: "#fff" },
-            navratri5: { title: "मां स्कंदमाता", subText: "शारदीय नवरात्रि - पंचम दिन", bgGradient: ["#3366ff", "#0022aa"], textColor: "#fff" },
-            navratri6: { title: "मां कात्यायनी", subText: "शारदीय नवरात्रि - छठा दिन", bgGradient: ["#ff3399", "#660033"], textColor: "#fff" },
-            navratri7: { title: "मां कालरात्रि", subText: "शारदीय नवरात्रि - सातवां दिन", bgGradient: ["#330066", "#000000"], textColor: "#ffd700" },
-            navratri8: { title: "मां महागौरी", subText: "महा अष्टमी की हार्दिक शुभकामनाएँ", bgGradient: ["#ff99ff", "#990099"], textColor: "#fff" },
-            navratri9: { title: "मां सिद्धिदात्री", subText: "महानवमी की हार्दिक शुभकामनाएँ", bgGradient: ["#ff3300", "#990000"], textColor: "#fff" },
-            dussehra: { title: "Happy Dussehra", subText: "असत्य पर सत्य की जीत की बधाई", bgGradient: ["#cc0000", "#ff9933"], textColor: "#fff" },
-            karwa: { title: "Happy Karva Chauth", subText: "अखंड सौभाग्यवती भवः", bgGradient: ["#cc0066", "#660033"], textColor: "#fff" },
-            diwali: { title: "Happy Diwali", subText: "शुभ दीपावली की हार्दिक शुभकामनाएँ", bgGradient: ["#ff9933", "#cc0000"], textColor: "#fff" },
-            bhaidooj: { title: "Happy Bhai Dooj", subText: "भाई-बहन के अटूट प्रेम का प्रतीक", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" },
-            chhath: { title: "Happy Chhath Puja", subText: "सूर्य देव की आराधना का महापर्व", bgGradient: ["#ff6600", "#ffcc00"], textColor: "#000" },
-            gurunanak: { title: "Guru Nanak Jayanti", subText: "गुरपुरब की लख-लख बधाइयां", bgGradient: ["#002db3", "#3399ff"], textColor: "#fff" },
+        // Indian Festivals Database with Start & End Dates
+        const festivalsData = [
+            { id: "gandhijayanti", name: "gandhi Jayanti", start: "2026-10-02", end: "2026-10-02", title: "Gandhi Jayanti", subText: "Rashtriya Pita ko Naman", bgGradient: ["#ff9933", "#138808"], textColor: "#fff" },
+            { id: "dussehra", name: "🏹 Dussehra (Vijayadashami)", start: "2026-10-20", end: "2026-10-20", title: "Happy Dussehra", subText: "Asatya par Satya ki Jeet", bgGradient: ["#cc0000", "#ff9933"], textColor: "#fff" },
+            { id: "diwali", name: "🪔 Diwali (Deepawali)", start: "2026-11-08", end: "2026-11-09", title: "Happy Diwali", subText: "Shubh Deepawali", bgGradient: ["#ff9933", "#cc0000"], textColor: "#fff" },
+            { id: "bhaidooj", name: "🎁 Bhai Dooj", start: "2026-11-10", end: "2026-11-10", title: "Happy Bhai Dooj", subText: "Bhai-Behan ka Prem", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" },
+            { id: "gurunanak", name: "🪯 Guru Nanak Jayanti", start: "2026-11-24", end: "2026-11-24", title: "Guru Nanak Jayanti", subText: "Gurpurab ki Shubhkamnayein", bgGradient: ["#002db3", "#3399ff"], textColor: "#fff" },
+            { id: "christmas", name: "🎄 Christmas", start: "2026-12-25", end: "2026-12-25", title: "Merry Christmas", subText: "Joy to the World", bgGradient: ["#cc0000", "#138808"], textColor: "#fff" },
+            { id: "newyear", name: "🎆 New Year", start: "2027-01-01", end: "2027-01-01", title: "Happy New Year 2027", subText: "Naye Saal ki Shubhkamnayein", bgGradient: ["#000000", "#434343"], textColor: "#ffd700" },
+            { id: "republic", name: "🇮🇳 Republic Day", start: "2027-01-26", end: "2027-01-26", title: "Republic Day", subText: "Jai Hind 🇮🇳", bgGradient: ["#ff9933", "#138808"], textColor: "#000" },
+            { id: "holi", name: "🎨 Holi", start: "2027-03-24", end: "2027-03-25", title: "Happy Holi", subText: "Rangon Ka Tyohar", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" }
+        ];
+
+        // Automatic Festival Filter
+        function loadActiveFestivals() {
+            const select = document.getElementById("festivalSelect");
+            select.innerHTML = "";
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
+            let activeCount = 0;
+
+            festivalsData.forEach(f => {
+                let startDate = new Date(f.start);
+                let endDate = new Date(f.end);
+                let showStartDate = new Date(startDate);
+                showStartDate.setDate(showStartDate.getDate() - 1);
+                showStartDate.setHours(0,0,0,0);
+                endDate.setHours(23,59,59,999);
+
+                if (today >= showStartDate && today <= endDate) {
+                    let opt = document.createElement("option");
+                    opt.value = f.id;
+                    opt.textContent = f.name;
+                    select.appendChild(opt);
+                    activeCount++;
+                }
+            });
+
+            if (activeCount === 0) {
+                festivalsData.forEach(f => {
+                    let opt = document.createElement("option");
+                    opt.value = f.id;
+                    opt.textContent = f.name + " (" + f.start + ")";
+                    select.appendChild(opt);
+                });
+            }
+        }
+
+        window.onload = loadActiveFestivals;
+
+        // Monetag Popunder Popup Ad Trigger (Zone: 11829758)
+        function triggerMonetagPopup() {
+            try {
+                const s = document.createElement('script');
+                s.dataset.zone = '11829758';
+                s.src = 'https://al5sm.com/tag.min.js';
+                document.body.appendChild(s);
+            } catch (e) {
+                console.log("Popunder error", e);
+            }
+        }
+
+        function generatePhoto() {
+            const nameInput = document.getElementById("userName").value.trim();
+            const festivalKey = document.getElementById("festivalSelect").value;
+
+            if (!nameInput) {
+                alert("Kripya apna naam darj karein!");
+                return;
+            }
+
+            const theme = festivalsData.find(f => f.id === festivalKey) || festivalsData[0];
+            const canvas = document.getElementById("photoCanvas");
+            const ctx = canvas.getContext("2d");
+
+            let gradient = ctx.createLinearGradient(0, 0, 0, 500);
+            if(festivalKey === 'republic' || festivalKey === 'gandhijayanti') {
+                gradient.addColorStop(0, "#ff9933");
+                gradient.addColorStop(0.5, "#ffffff");
+                gradient.addColorStop(1, "#138808");
+            } else {
+                gradient.addColorStop(0, theme.bgGradient[0]);
+                gradient.addColorStop(1, theme.bgGradient[1]);
+            }
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 500, 500);
+
+            ctx.strokeStyle = "#ffd700";
+            ctx.lineWidth = 15;
+            ctx.strokeRect(10, 10, 480, 480);
+
+            ctx.fillStyle = (festivalKey === 'republic') ? '#000' : theme.textColor;
+            ctx.font = "bold 34px sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText(theme.title, 250, 120);
+
+            ctx.font = "20px sans-serif";
+            ctx.fillText(theme.subText, 250, 170);
+
+            ctx.strokeStyle = "#ffd700";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(150, 200);
+            ctx.lineTo(350, 200);
+            ctx.stroke();
+
+            ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+            ctx.fillRect(50, 300, 400, 100);
+
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "18px sans-serif";
+            ctx.fillText("Courtesy / Shubhkamnayein:", 250, 335);
+
+            ctx.fillStyle = "#ffd700";
+            ctx.font = "bold 32px sans-serif";
+            ctx.fillText(nameInput, 250, 375);
+
+            document.getElementById("resultSection").classList.remove("hidden");
+            
+            // Set Download Link
+            const dataUrl = canvas.toDataURL("image/png");
+            document.getElementById("downloadBtn").href = dataUrl;
+
+            document.getElementById("resultSection").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Share Function with Web Share API (Shares Image + Text directly to WhatsApp)
+        async function sharePhotoWithAd() {
+            // 1. Trigger Popunder Ad
+            triggerMonetagPopup();
+
+            const canvas = document.getElementById("photoCanvas");
+            const siteUrl = window.location.href;
+            const shareText = "🌟 Maine apni festival greeting photo yahan banayi! Aap bhi apna naam daal kar bilkul aisi free photo banayein:\n" + siteUrl;
+
+            canvas.toBlob(async (blob) => {
+                const file = new File([blob], "festival-greeting.png", { type: "image/png" });
+
+                // Check if Web Share API with files is supported (Mobile WhatsApp, etc.)
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            title: 'Festival Greeting Photo',
+                            text: shareText,
+                            files: [file]
+                        });
+                        return;
+                    } catch (error) {
+                        console.log("Share canceled or failed", error);
+                    }
+                }
+
+                // Fallback for browsers not supporting direct file sharing: Download photo + open WhatsApp text
+                const link = document.createElement('a');
+                link.download = 'festival-greeting.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+
+                setTimeout(() => {
+                    const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
+                    window.open(whatsappUrl, '_blank');
+                }, 800);
+            }, 'image/png');
+        }
+    </script>
+</body>
+</html>
