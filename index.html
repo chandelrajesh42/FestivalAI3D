@@ -14,12 +14,12 @@
 <body class="bg-slate-100 min-h-screen flex flex-col justify-between">
 
     <!-- TOP BANNER AD -->
-    <div class="w-full bg-white py-1 text-center border-b shadow-sm">
+    <div class="w-full bg-white py-2 text-center border-b shadow-sm">
         <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
 
-    <!-- Main Container -->
-    <main class="max-w-md mx-auto w-full p-4 flex-grow">
+    <!-- Main Container with proper spacing so ad doesn't overlap -->
+    <main class="max-w-md mx-auto w-full p-4 pt-6 flex-grow">
         <div class="bg-white rounded-2xl shadow-xl p-5 mb-6">
             <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 Indian Festival Photo Maker</h1>
             <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur har tyohar ki shandar photo banayein!</p>
@@ -28,7 +28,7 @@
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Tyohar Chunein (Select Festival):</label>
                 <select id="festivalSelect" class="w-full p-2.5 border rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-red-500 outline-none">
-                    <!-- Dynamic Festivals Loaded via JS -->
+                    <option value="">Tyohar Load ho rahe hain...</option>
                 </select>
             </div>
 
@@ -62,13 +62,13 @@
     </main>
 
     <!-- BOTTOM BANNER AD -->
-    <div class="w-full bg-white py-1 text-center border-t shadow-sm mt-auto">
+    <div class="w-full bg-white py-2 text-center border-t shadow-sm mt-auto">
         <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
 
     <!-- JavaScript Logic & Complete Festival Database -->
     <script>
-        // Complete Indian Festivals & Navratri 9 Days Database
+        // Complete Indian Festivals & Navratri Database
         const festivalsData = [
             // Navratri Days
             { id: "navratri1", name: "🌺 Shardiya Navratri - Day 1 (Maa Shailputri)", title: "Maa Shailputri", subText: "Shardiya Navratri Day 1", bgGradient: ["#ff3366", "#990033"], textColor: "#fff" },
@@ -97,24 +97,23 @@
             { id: "holi", name: "🎨 Holi", title: "Happy Holi", subText: "Rangon Ka Tyohar", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" },
             { id: "rakhi", name: "🧵 Raksha Bandhan", title: "Happy Raksha Bandhan", subText: "Bhai-Behan ke Pyar ka Tyohar", bgGradient: ["#003366", "#ff3366"], textColor: "#fff" },
             { id: "janmashtami", name: "🦚 Shri Krishna Janmashtami", title: "Happy Janmashtami", subText: "Hathi Ghoda Palki, Jai Kanhaiya Lal Ki", bgGradient: ["#000099", "#00cccc"], textColor: "#fff" },
-            { id: "ganesh", name: "モ Ganesh Chaturthi", title: "Happy Ganesh Chaturthi", subText: "Ganpati Bappa Morya", bgGradient: ["#ff6600", "#990000"], textColor: "#fff" },
+            { id: "ganesh", name: "🐘 Ganesh Chaturthi", title: "Happy Ganesh Chaturthi", subText: "Ganpati Bappa Morya", bgGradient: ["#ff6600", "#990000"], textColor: "#fff" },
             { id: "eid", name: "🌙 Eid-ul-Fitr / Eid al-Adha", title: "Eid Mubarak", subText: "Khushiyon Bhari Eid", bgGradient: ["#006600", "#003300"], textColor: "#ffd700" }
         ];
 
-        // Load All Festivals into Dropdown Immediately
-        function loadFestivals() {
+        // Ensure DOM is fully loaded before populating dropdown
+        document.addEventListener("DOMContentLoaded", function() {
             const select = document.getElementById("festivalSelect");
-            select.innerHTML = "";
-
-            festivalsData.forEach(f => {
-                let opt = document.createElement("option");
-                opt.value = f.id;
-                opt.textContent = f.name;
-                select.appendChild(opt);
-            });
-        }
-
-        window.onload = loadFestivals;
+            if (select) {
+                select.innerHTML = "";
+                festivalsData.forEach(f => {
+                    let opt = document.createElement("option");
+                    opt.value = f.id;
+                    opt.textContent = f.name;
+                    select.appendChild(opt);
+                });
+            }
+        });
 
         // Monetag Popunder Popup Ad Trigger on Button Click
         function triggerMonetagPopup() {
