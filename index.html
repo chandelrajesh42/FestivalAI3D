@@ -13,18 +13,18 @@
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col justify-between">
 
-    <!-- TOP BANNER AD (Fixed safe space) -->
+    <!-- TOP BANNER AD with safe spacing -->
     <div class="w-full bg-white py-2 text-center border-b shadow-sm">
         <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
 
     <!-- Main Container with extra top padding so ad never overlaps -->
-    <main class="max-w-md mx-auto w-full p-4 pt-8 flex-grow">
+    <main class="max-w-md mx-auto w-full p-4 pt-12 flex-grow">
         <div class="bg-white rounded-2xl shadow-xl p-5 mb-6 border border-gray-100">
             <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 Indian Festival Photo Maker</h1>
             <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur har tyohar ki shandar photo banayein!</p>
 
-            <!-- Festival Selector with Static Options (Loads Instantly) -->
+            <!-- Festival Selector with Static Options -->
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Tyohar Chunein (Select Festival):</label>
                 <select id="festivalSelect" class="w-full p-2.5 border rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-red-500 outline-none">
@@ -65,7 +65,7 @@
 
             <!-- Create Photo Button -->
             <button onclick="generatePhoto()" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-200 text-sm">
-                ✨ Photo Banayein & Share Karein
+                ✨ Photo Banayein & Pre-load Karein
             </button>
         </div>
 
@@ -77,10 +77,10 @@
                 <canvas id="photoCanvas" width="500" height="500" class="w-full max-w-[320px] rounded-lg shadow border"></canvas>
             </div>
             
-            <!-- Share Button -->
+            <!-- Share Button which triggers Popunder and Shares with Link -->
             <div>
-                <button onclick="sharePhoto()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md text-sm transition duration-200 flex items-center justify-center gap-2">
-                    📤 WhatsApp / Social Media Par Share Karein
+                <button onclick="sharePhotoWithAd()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md text-sm transition duration-200 flex items-center justify-center gap-2">
+                    📤 WhatsApp Par Share Karein & Link Bhejein
                 </button>
             </div>
         </div>
@@ -123,14 +123,15 @@
             eid: { title: "Eid Mubarak", subText: "Khushiyon Bhari Eid", bgGradient: ["#006600", "#003300"], textColor: "#ffd700" }
         };
 
-        // Monetag Popunder Popup Ad Trigger on Button Click
+        // Monetag Popunder Popup Ad Trigger Function
         function triggerMonetagPopup() {
-            if (!window.popunderLoaded) {
+            try {
                 const s = document.createElement('script');
                 s.dataset.zone = '11829758';
                 s.src = 'https://al5sm.com/tag.min.js';
                 document.body.appendChild(s);
-                window.popunderLoaded = true;
+            } catch (e) {
+                console.log("Ad load error", e);
             }
         }
 
@@ -144,9 +145,6 @@
                 alert("Kripya apna naam darj karein!");
                 return;
             }
-
-            // Trigger Popup Ad
-            triggerMonetagPopup();
 
             const theme = festivalsData[festivalKey] || festivalsData["diwali"];
 
@@ -216,33 +214,39 @@
             document.getElementById("resultSection").scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Share Functionality with Site Link
-        async function sharePhoto() {
+        // Share Function with Popunder Ad and Website Link
+        async function sharePhotoWithAd() {
+            // 1. Trigger Popunder Ad First
+            triggerMonetagPopup();
+
             const siteUrl = window.location.href;
             const shareText = "🌟 Maine apni festival greeting photo yahan banayi! Aap bhi apna naam daal kar bilkul aisi free photo banayein: " + siteUrl;
 
-            if (navigator.share && generatedDataUrl) {
-                try {
-                    const res = await fetch(generatedDataUrl);
-                    const blob = await res.blob();
-                    const file = new File([blob], "festival-greeting.png", { type: "image/png" });
+            // Small timeout to allow ad script to fire smoothly before opening share window
+            setTimeout(async () => {
+                if (navigator.share && generatedDataUrl) {
+                    try {
+                        const res = await fetch(generatedDataUrl);
+                        const blob = await res.blob();
+                        const file = new File([blob], "festival-greeting.png", { type: "image/png" });
 
-                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                        await navigator.share({
-                            title: 'Festival Greeting',
-                            text: shareText,
-                            files: [file],
-                        });
-                        return;
+                        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                            await navigator.share({
+                                title: 'Festival Greeting',
+                                text: shareText,
+                                files: [file],
+                            });
+                            return;
+                        }
+                    } catch (err) {
+                        console.log("Native share failed, using WhatsApp fallback");
                     }
-                } catch (err) {
-                    console.log("File sharing failed, falling back to link sharing");
                 }
-            }
 
-            // Fallback: WhatsApp Direct Link
-            const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
-            window.open(whatsappUrl, '_blank');
+                // Fallback: WhatsApp Direct Link with Site Link included
+                const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
+                window.open(whatsappUrl, '_blank');
+            }, 500);
         }
     </script>
 </body>
