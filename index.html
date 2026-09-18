@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Festival Photo Generator</title>
+    <title>All Indian Festival Photo Maker</title>
     
     <!-- Monetag Verification Meta Tag -->
     <meta name="monetag" content="f17ed5532ceba8d5beaf3548acd6ea90">
@@ -21,14 +21,14 @@
     <!-- Main Container -->
     <main class="max-w-md mx-auto w-full p-4 flex-grow">
         <div class="bg-white rounded-2xl shadow-xl p-5 mb-6">
-            <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 Festival Photo Maker</h1>
-            <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur tyohar ki shandar photo banayein!</p>
+            <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 Indian Festival Photo Maker</h1>
+            <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur har tyohar ki shandar photo banayein!</p>
 
             <!-- Festival Selector (Auto Calendar) -->
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Tyohar Chunein (Select Festival):</label>
                 <select id="festivalSelect" class="w-full p-2.5 border rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-red-500 outline-none">
-                    <!-- Yeh automatically date ke hisab se update hoga -->
+                    <!-- Dynamic Festivals -->
                 </select>
             </div>
 
@@ -40,20 +40,24 @@
 
             <!-- Create Photo Button -->
             <button onclick="generatePhoto()" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-200 text-sm">
-                ✨ Photo Banayein (Create Photo)
+                ✨ Photo Banayein & Share Karein
             </button>
         </div>
 
-        <!-- Preview & Download Section -->
+        <!-- Preview & Share Section -->
         <div id="resultSection" class="bg-white rounded-2xl shadow-xl p-5 hidden text-center">
             <h2 class="text-md font-semibold text-gray-700 mb-3">Aapki Photo Taiyar Hai! 👇</h2>
             <div class="flex justify-center mb-4">
                 <!-- Canvas for Generating Image -->
                 <canvas id="photoCanvas" width="500" height="500" class="w-full max-w-[320px] rounded-lg shadow border"></canvas>
             </div>
-            <a id="downloadBtn" download="festival-greeting.png" class="inline-block w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2.5 rounded-lg shadow-md text-sm transition duration-200">
-                📥 Download Photo
-            </a>
+            
+            <!-- Sirf Share Button (No Download) -->
+            <div>
+                <button onclick="sharePhoto()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md text-sm transition duration-200 flex items-center justify-center gap-2">
+                    📤 WhatsApp / Social Media Par Share Karein
+                </button>
+            </div>
         </div>
     </main>
 
@@ -62,22 +66,38 @@
         <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
 
-    <!-- JavaScript Logic & Calendar System -->
+    <!-- JavaScript Logic & Comprehensive Festival Database -->
     <script>
-        // Indian Festivals Database with Start & End Dates
+        // Comprehensive Indian Festivals & Navratri 9 Days Database (2026-2027)
         const festivalsData = [
-            { id: "gandhijayanti", name: " gandhi Jayanti", start: "2026-10-02", end: "2026-10-02", title: "Gandhi Jayanti", subText: "Rashtriya Pita ko Naman", bgGradient: ["#ff9933", "#138808"], textColor: "#fff" },
-            { id: "dussehra", name: "🏹 Dussehra (Vijayadashami)", start: "2026-10-20", end: "2026-10-20", title: "Happy Dussehra", subText: "Asatya par Satya ki Jeet", bgGradient: ["#cc0000", "#ff9933"], textColor: "#fff" },
+            // Navratri Days
+            { id: "navratri1", name: "🌺 Shardiya Navratri - Day 1 (Maa Shailputri)", start: "2026-10-11", end: "2026-10-11", title: "Maa Shailputri", subText: "Shardiya Navratri Day 1", bgGradient: ["#ff3366", "#990033"], textColor: "#fff" },
+            { id: "navratri2", name: "🌺 Shardiya Navratri - Day 2 (Maa Brahmacharini)", start: "2026-10-12", end: "2026-10-12", title: "Maa Brahmacharini", subText: "Shardiya Navratri Day 2", bgGradient: ["#ff9933", "#cc6600"], textColor: "#fff" },
+            { id: "navratri3", name: "🌺 Shardiya Navratri - Day 3 (Maa Chandraghanta)", start: "2026-10-13", end: "2026-10-13", title: "Maa Chandraghanta", subText: "Shardiya Navratri Day 3", bgGradient: ["#ffcc00", "#ff6600"], textColor: "#000" },
+            { id: "navratri4", name: "🌺 Shardiya Navratri - Day 4 (Maa Kushmanda)", start: "2026-10-14", end: "2026-10-14", title: "Maa Kushmanda", subText: "Shardiya Navratri Day 4", bgGradient: ["#33cc33", "#006600"], textColor: "#fff" },
+            { id: "navratri5", name: "🌺 Shardiya Navratri - Day 5 (Maa Skandamata)", start: "2026-10-15", end: "2026-10-15", title: "Maa Skandamata", subText: "Shardiya Navratri Day 5", bgGradient: ["#ffcc00", "#999900"], textColor: "#000" },
+            { id: "navratri6", name: "🌺 Shardiya Navratri - Day 6 (Maa Katyayani)", start: "2026-10-16", end: "2026-10-16", title: "Maa Katyayani", subText: "Shardiya Navratri Day 6", bgGradient: ["#ff3399", "#660033"], textColor: "#fff" },
+            { id: "navratri7", name: "🌺 Shardiya Navratri - Day 7 (Maa Kalaratri)", start: "2026-10-17", end: "2026-10-17", title: "Maa Kalaratri", subText: "Shardiya Navratri Day 7", bgGradient: ["#330066", "#000000"], textColor: "#ffd700" },
+            { id: "navratri8", name: "🌺 Shardiya Navratri - Day 8 (Maa Mahagauri / Ashtami)", start: "2026-10-18", end: "2026-10-18", title: "Maa Mahagauri", subText: "Maha Ashtami Shubhkamnayein", bgGradient: ["#ff99ff", "#990099"], textColor: "#fff" },
+            { id: "navratri9", name: "🌺 Shardiya Navratri - Day 9 (Maa Siddhidatri / Navami)", start: "2026-10-19", end: "2026-10-19", title: "Maa Siddhidatri", subText: "Mahanavami & Dussehra ki Shubhkamnayein", bgGradient: ["#ff3300", "#990000"], textColor: "#fff" },
+            
+            // Major Festivals
+            { id: "dussehra", name: "🏹 Vijayadashami (Dussehra)", start: "2026-10-20", end: "2026-10-20", title: "Happy Dussehra", subText: "Asatya par Satya ki Jeet", bgGradient: ["#cc0000", "#ff9933"], textColor: "#fff" },
+            { id: "karwa", name: "🌕 Karva Chauth", start: "2026-10-29", end: "2026-10-29", title: "Happy Karva Chauth", subText: "Akhand Saubhagyavati", bgGradient: ["#cc0066", "#660033"], textColor: "#fff" },
             { id: "diwali", name: "🪔 Diwali (Deepawali)", start: "2026-11-08", end: "2026-11-09", title: "Happy Diwali", subText: "Shubh Deepawali", bgGradient: ["#ff9933", "#cc0000"], textColor: "#fff" },
             { id: "bhaidooj", name: "🎁 Bhai Dooj", start: "2026-11-10", end: "2026-11-10", title: "Happy Bhai Dooj", subText: "Bhai-Behan ka Prem", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" },
+            { id: "chhath", name: "☀️ Chhath Puja", start: "2026-11-15", end: "2026-11-16", title: "Happy Chhath Puja", subText: "Surya Dev ki Aaradhna", bgGradient: ["#ff6600", "#ffcc00"], textColor: "#000" },
             { id: "gurunanak", name: "🪯 Guru Nanak Jayanti", start: "2026-11-24", end: "2026-11-24", title: "Guru Nanak Jayanti", subText: "Gurpurab ki Shubhkamnayein", bgGradient: ["#002db3", "#3399ff"], textColor: "#fff" },
             { id: "christmas", name: "🎄 Christmas", start: "2026-12-25", end: "2026-12-25", title: "Merry Christmas", subText: "Joy to the World", bgGradient: ["#cc0000", "#138808"], textColor: "#fff" },
-            { id: "newyear", name: "🎆 New Year", start: "2027-01-01", end: "2027-01-01", title: "Happy New Year 2027", subText: "Naye Saal ki Shubhkamnayein", bgGradient: ["#000000", "#434343"], textColor: "#ffd700" },
+            { id: "newyear", name: "🎆 Happy New Year 2027", start: "2027-01-01", end: "2027-01-01", title: "Happy New Year 2027", subText: "Naye Saal ki Shubhkamnayein", bgGradient: ["#000000", "#434343"], textColor: "#ffd700" },
+            { id: "lohri", name: "🔥 Lohri", start: "2027-01-13", end: "2027-01-13", title: "Happy Lohri", subText: "Tyohar Khushiyon Ka", bgGradient: ["#ff3300", "#ff9900"], textColor: "#fff" },
+            { id: "makarsankranti", name: "🪁 Makar Sankranti / Pongal", start: "2027-01-14", end: "2027-01-14", title: "Happy Makar Sankranti", subText: "Patang Utsav ki Shubhkamnayein", bgGradient: ["#0099ff", "#ffff33"], textColor: "#000" },
             { id: "republic", name: "🇮🇳 Republic Day", start: "2027-01-26", end: "2027-01-26", title: "Republic Day", subText: "Jai Hind 🇮🇳", bgGradient: ["#ff9933", "#138808"], textColor: "#000" },
+            { id: "shivratri", name: "🔱 Maha Shivratri", start: "2027-03-07", end: "2027-03-07", title: "Maha Shivratri", subText: "Har Har Mahadev", bgGradient: ["#000066", "#333333"], textColor: "#ffd700" },
             { id: "holi", name: "🎨 Holi", start: "2027-03-24", end: "2027-03-25", title: "Happy Holi", subText: "Rangon Ka Tyohar", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" }
         ];
 
-        // Automatic Festival Filter (1 din pehle se shuru aur ant tak dikhega)
+        // Automatic Festival Filter
         function loadActiveFestivals() {
             const select = document.getElementById("festivalSelect");
             select.innerHTML = "";
@@ -90,7 +110,6 @@
                 let startDate = new Date(f.start);
                 let endDate = new Date(f.end);
                 
-                // 1 din pehle active karne ke liye
                 let showStartDate = new Date(startDate);
                 showStartDate.setDate(showStartDate.getDate() - 1);
                 showStartDate.setHours(0,0,0,0);
@@ -106,7 +125,6 @@
                 }
             });
 
-            // Agar aaj ke din koi active tyohar nahi hai, toh testing ke liye saare aane wale tyohar dikha do taaki dropdown khali na rahe
             if (activeCount === 0) {
                 festivalsData.forEach(f => {
                     let opt = document.createElement("option");
@@ -117,7 +135,6 @@
             }
         }
 
-        // Page load hote hi calendar check karega
         window.onload = loadActiveFestivals;
 
         // Monetag Popunder Popup Ad Trigger on Button Click
@@ -131,6 +148,8 @@
             }
         }
 
+        let generatedDataUrl = "";
+
         function generatePhoto() {
             const nameInput = document.getElementById("userName").value.trim();
             const festivalKey = document.getElementById("festivalSelect").value;
@@ -143,16 +162,14 @@
             // 1. Popup Ad Triggered on Click
             triggerMonetagPopup();
 
-            // Find selected festival theme data
             const theme = festivalsData.find(f => f.id === festivalKey) || festivalsData[0];
 
             // 2. Canvas Rendering
             const canvas = document.getElementById("photoCanvas");
             const ctx = canvas.getContext("2d");
 
-            // Background Gradient Draw karein
             let gradient = ctx.createLinearGradient(0, 0, 0, 500);
-            if(festivalKey === 'republic' || festivalKey === 'gandhijayanti') {
+            if(festivalKey === 'republic') {
                 gradient.addColorStop(0, "#ff9933");
                 gradient.addColorStop(0.5, "#ffffff");
                 gradient.addColorStop(1, "#138808");
@@ -166,48 +183,80 @@
 
             // Border Design
             ctx.strokeStyle = "#ffd700";
-            ctx.lineWidth = 15;
+            ctx.lineWidth = 14;
             ctx.strokeRect(10, 10, 480, 480);
+
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(22, 22, 456, 456);
 
             // Festival Title
             ctx.fillStyle = (festivalKey === 'republic') ? '#000' : theme.textColor;
-            ctx.font = "bold 34px sans-serif";
+            ctx.font = "bold 32px sans-serif";
             ctx.textAlign = "center";
-            ctx.fillText(theme.title, 250, 120);
+            ctx.fillText(theme.title, 250, 130);
 
             // Subtext
             ctx.font = "20px sans-serif";
-            ctx.fillText(theme.subText, 250, 170);
+            ctx.fillText(theme.subText, 250, 180);
 
             // Decorative line
             ctx.strokeStyle = "#ffd700";
             ctx.lineWidth = 3;
             ctx.beginPath();
-            ctx.moveTo(150, 200);
-            ctx.lineTo(350, 200);
+            ctx.moveTo(140, 215);
+            ctx.lineTo(360, 215);
             ctx.stroke();
 
             // User Name Box / Label
-            ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
-            ctx.fillRect(50, 300, 400, 100);
+            ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+            ctx.roundRect ? ctx.beginPath(), ctx.roundRect(40, 290, 420, 120, 15), ctx.fill() : ctx.fillRect(40, 290, 420, 120);
 
             ctx.fillStyle = "#ffffff";
-            ctx.font = "18px sans-serif";
-            ctx.fillText("Courtesy / Shubhkamnayein:", 250, 335);
+            ctx.font = "16px sans-serif";
+            ctx.fillText("✨ Shubh Shubhkamnayein ✨", 250, 330);
 
             ctx.fillStyle = "#ffd700";
-            ctx.font = "bold 32px sans-serif";
+            ctx.font = "bold 34px sans-serif";
             ctx.fillText(nameInput, 250, 375);
 
             // Show Result Section
             document.getElementById("resultSection").classList.remove("hidden");
 
-            // Set Download Link
-            const downloadBtn = document.getElementById("downloadBtn");
-            downloadBtn.href = canvas.toDataURL("image/png");
+            // Save Data URL for Sharing
+            generatedDataUrl = canvas.toDataURL("image/png");
             
             // Scroll to result
             document.getElementById("resultSection").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Share Functionality with Site Link
+        async function sharePhoto() {
+            const siteUrl = window.location.href;
+            const shareText = "🌟 Maine apni festival greeting photo yahan banayi! Aap bhi apna naam daal kar bilkul aisi free photo banayein: " + siteUrl;
+
+            if (navigator.share && generatedDataUrl) {
+                try {
+                    const res = await fetch(generatedDataUrl);
+                    const blob = await res.blob();
+                    const file = new File([blob], "festival-greeting.png", { type: "image/png" });
+
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                            title: 'Festival Greeting',
+                            text: shareText,
+                            files: [file],
+                        });
+                        return;
+                    }
+                } catch (err) {
+                    console.log("File sharing failed, falling back to link sharing");
+                }
+            }
+
+            // Fallback: WhatsApp Direct Link with text and site URL
+            const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
+            window.open(whatsappUrl, '_blank');
         }
     </script>
 </body>
