@@ -13,16 +13,16 @@
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col justify-between">
 
-    <!-- TOP BANNER AD -->
-    <div class="w-full bg-white py-2 text-center border-b shadow-sm">
+    <!-- TOP BANNER AD (Safe spacing so it never overlaps content) -->
+    <div class="w-full bg-white py-2 text-center border-b shadow-sm fixed top-0 z-50">
         <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
 
-    <!-- Main Container -->
-    <main class="max-w-md mx-auto w-full p-4 pt-12 flex-grow">
+    <!-- Main Container with top padding -->
+    <main class="max-w-md mx-auto w-full p-4 pt-20 flex-grow">
         <div class="bg-white rounded-2xl shadow-xl p-5 mb-6 border border-gray-100">
             <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 Indian Festival Photo Maker</h1>
-            <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur ek click mein photo banakar share karein!</p>
+            <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur har tyohar ki shandar photo banayein!</p>
 
             <!-- Festival Selector -->
             <div class="mb-4">
@@ -60,17 +60,29 @@
             <!-- User Name Input -->
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Aapka Naam (Your Name):</label>
-                <input type="text" id="userName" placeholder="Jaise: Rahul Sharma" class="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                <input type="text" id="userName" placeholder="Jaise: Rajesh Kumar" class="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none">
             </div>
 
-            <!-- Single Action Button: Creates & Shares Instantly with Popunder -->
-            <button onclick="generateAndShare()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-lg shadow-md transition duration-200 text-sm flex items-center justify-center gap-2">
-                ✨ Photo Banayein & WhatsApp Share Karein
+            <!-- Create Photo Button -->
+            <button onclick="generatePhoto()" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-200 text-sm">
+                ✨ Photo Banayein
             </button>
         </div>
 
-        <!-- Hidden Canvas for Image Processing -->
-        <canvas id="photoCanvas" width="500" height="500" class="hidden"></canvas>
+        <!-- Preview & Share Section (Appears after clicking generate) -->
+        <div id="resultSection" class="bg-white rounded-2xl shadow-xl p-5 hidden text-center border border-gray-100">
+            <h2 class="text-md font-semibold text-gray-700 mb-3">Aapki Photo Taiyar Hai! 👇</h2>
+            <div class="flex justify-center mb-4">
+                <canvas id="photoCanvas" width="500" height="500" class="w-full max-w-[300px] rounded-lg shadow border"></canvas>
+            </div>
+            
+            <!-- Share Button with Popunder integration -->
+            <div>
+                <button onclick="sharePhotoWithAd()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md text-sm transition duration-200 flex items-center justify-center gap-2">
+                    📤 WhatsApp Par Share Karein (Link ke sath)
+                </button>
+            </div>
+        </div>
     </main>
 
     <!-- BOTTOM BANNER AD -->
@@ -109,7 +121,7 @@
             eid: { title: "Eid Mubarak", subText: "Khushiyon Bhari Eid", bgGradient: ["#006600", "#003300"], textColor: "#ffd700" }
         };
 
-        // Synchronous Popunder Ad Trigger
+        // Popunder Ad Trigger Function (Zone 11829758)
         function triggerMonetagPopup() {
             try {
                 const s = document.createElement('script');
@@ -117,11 +129,13 @@
                 s.src = 'https://al5sm.com/tag.min.js';
                 document.body.appendChild(s);
             } catch (e) {
-                console.log("Ad error", e);
+                console.log("Popunder load error", e);
             }
         }
 
-        function generateAndShare() {
+        let generatedDataUrl = "";
+
+        function generatePhoto() {
             const nameInput = document.getElementById("userName").value.trim();
             const festivalKey = document.getElementById("festivalSelect").value;
 
@@ -130,10 +144,6 @@
                 return;
             }
 
-            // 1. Trigger Popunder Ad Instantly on Click
-            triggerMonetagPopup();
-
-            // 2. Generate Canvas Image Instantly
             const theme = festivalsData[festivalKey] || festivalsData["diwali"];
             const canvas = document.getElementById("photoCanvas");
             const ctx = canvas.getContext("2d");
@@ -151,6 +161,7 @@
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, 500, 500);
 
+            // Border Design
             ctx.strokeStyle = "#ffd700";
             ctx.lineWidth = 14;
             ctx.strokeRect(10, 10, 480, 480);
@@ -159,14 +170,17 @@
             ctx.lineWidth = 2;
             ctx.strokeRect(22, 22, 456, 456);
 
+            // Festival Title
             ctx.fillStyle = (festivalKey === 'republic') ? '#000' : theme.textColor;
             ctx.font = "bold 32px sans-serif";
             ctx.textAlign = "center";
             ctx.fillText(theme.title, 250, 130);
 
+            // Subtext
             ctx.font = "20px sans-serif";
             ctx.fillText(theme.subText, 250, 180);
 
+            // Divider Line
             ctx.strokeStyle = "#ffd700";
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -174,6 +188,7 @@
             ctx.lineTo(360, 215);
             ctx.stroke();
 
+            // Name Box Overlay
             ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
             ctx.roundRect ? ctx.beginPath(), ctx.roundRect(40, 290, 420, 120, 15), ctx.fill() : ctx.fillRect(40, 290, 420, 120);
 
@@ -185,30 +200,25 @@
             ctx.font = "bold 34px sans-serif";
             ctx.fillText(nameInput, 250, 375);
 
-            // 3. Share Generated Image & Link Immediately
+            // Show preview section & scroll smoothly
+            document.getElementById("resultSection").classList.remove("hidden");
+            generatedDataUrl = canvas.toDataURL("image/png");
+            document.getElementById("resultSection").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Share Function: Triggers Popunder Ad first, then opens WhatsApp with site link
+        function sharePhotoWithAd() {
+            // 1. Trigger Popunder Ad
+            triggerMonetagPopup();
+
             const siteUrl = window.location.href;
             const shareText = "🌟 Maine apni festival greeting photo yahan banayi! Aap bhi apna naam daal kar bilkul aisi free photo banayein: " + siteUrl;
 
-            canvas.toBlob(blob => {
-                const file = new File([blob], "festival-greeting.png", { type: "image/png" });
-                
-                if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-                    navigator.share({
-                        title: 'Festival Greeting',
-                        text: shareText,
-                        files: [file],
-                    }).catch(() => {
-                        openWhatsApp(shareText);
-                    });
-                } else {
-                    openWhatsApp(shareText);
-                }
-            }, "image/png");
-        }
-
-        function openWhatsApp(text) {
-            const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(text);
-            window.open(whatsappUrl, '_blank');
+            // 2. Open WhatsApp Share after small click action
+            setTimeout(() => {
+                const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
+                window.open(whatsappUrl, '_blank');
+            }, 600);
         }
     </script>
 </body>
