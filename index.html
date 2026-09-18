@@ -24,11 +24,11 @@
             <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 Indian Festival Photo Maker</h1>
             <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur har tyohar ki shandar photo banayein!</p>
 
-            <!-- Festival Selector (Auto Calendar) -->
+            <!-- Festival Selector -->
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Tyohar Chunein (Select Festival):</label>
                 <select id="festivalSelect" class="w-full p-2.5 border rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-red-500 outline-none">
-                    <!-- Dynamic Festivals -->
+                    <!-- Dynamic Festivals Loaded via JS -->
                 </select>
             </div>
 
@@ -52,7 +52,7 @@
                 <canvas id="photoCanvas" width="500" height="500" class="w-full max-w-[320px] rounded-lg shadow border"></canvas>
             </div>
             
-            <!-- Sirf Share Button (No Download) -->
+            <!-- Share Button -->
             <div>
                 <button onclick="sharePhoto()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md text-sm transition duration-200 flex items-center justify-center gap-2">
                     📤 WhatsApp / Social Media Par Share Karein
@@ -66,76 +66,55 @@
         <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
 
-    <!-- JavaScript Logic & Comprehensive Festival Database -->
+    <!-- JavaScript Logic & Complete Festival Database -->
     <script>
-        // Comprehensive Indian Festivals & Navratri 9 Days Database (2026-2027)
+        // Complete Indian Festivals & Navratri 9 Days Database
         const festivalsData = [
             // Navratri Days
-            { id: "navratri1", name: "🌺 Shardiya Navratri - Day 1 (Maa Shailputri)", start: "2026-10-11", end: "2026-10-11", title: "Maa Shailputri", subText: "Shardiya Navratri Day 1", bgGradient: ["#ff3366", "#990033"], textColor: "#fff" },
-            { id: "navratri2", name: "🌺 Shardiya Navratri - Day 2 (Maa Brahmacharini)", start: "2026-10-12", end: "2026-10-12", title: "Maa Brahmacharini", subText: "Shardiya Navratri Day 2", bgGradient: ["#ff9933", "#cc6600"], textColor: "#fff" },
-            { id: "navratri3", name: "🌺 Shardiya Navratri - Day 3 (Maa Chandraghanta)", start: "2026-10-13", end: "2026-10-13", title: "Maa Chandraghanta", subText: "Shardiya Navratri Day 3", bgGradient: ["#ffcc00", "#ff6600"], textColor: "#000" },
-            { id: "navratri4", name: "🌺 Shardiya Navratri - Day 4 (Maa Kushmanda)", start: "2026-10-14", end: "2026-10-14", title: "Maa Kushmanda", subText: "Shardiya Navratri Day 4", bgGradient: ["#33cc33", "#006600"], textColor: "#fff" },
-            { id: "navratri5", name: "🌺 Shardiya Navratri - Day 5 (Maa Skandamata)", start: "2026-10-15", end: "2026-10-15", title: "Maa Skandamata", subText: "Shardiya Navratri Day 5", bgGradient: ["#ffcc00", "#999900"], textColor: "#000" },
-            { id: "navratri6", name: "🌺 Shardiya Navratri - Day 6 (Maa Katyayani)", start: "2026-10-16", end: "2026-10-16", title: "Maa Katyayani", subText: "Shardiya Navratri Day 6", bgGradient: ["#ff3399", "#660033"], textColor: "#fff" },
-            { id: "navratri7", name: "🌺 Shardiya Navratri - Day 7 (Maa Kalaratri)", start: "2026-10-17", end: "2026-10-17", title: "Maa Kalaratri", subText: "Shardiya Navratri Day 7", bgGradient: ["#330066", "#000000"], textColor: "#ffd700" },
-            { id: "navratri8", name: "🌺 Shardiya Navratri - Day 8 (Maa Mahagauri / Ashtami)", start: "2026-10-18", end: "2026-10-18", title: "Maa Mahagauri", subText: "Maha Ashtami Shubhkamnayein", bgGradient: ["#ff99ff", "#990099"], textColor: "#fff" },
-            { id: "navratri9", name: "🌺 Shardiya Navratri - Day 9 (Maa Siddhidatri / Navami)", start: "2026-10-19", end: "2026-10-19", title: "Maa Siddhidatri", subText: "Mahanavami & Dussehra ki Shubhkamnayein", bgGradient: ["#ff3300", "#990000"], textColor: "#fff" },
+            { id: "navratri1", name: "🌺 Shardiya Navratri - Day 1 (Maa Shailputri)", title: "Maa Shailputri", subText: "Shardiya Navratri Day 1", bgGradient: ["#ff3366", "#990033"], textColor: "#fff" },
+            { id: "navratri2", name: "🌺 Shardiya Navratri - Day 2 (Maa Brahmacharini)", title: "Maa Brahmacharini", subText: "Shardiya Navratri Day 2", bgGradient: ["#ff9933", "#cc6600"], textColor: "#fff" },
+            { id: "navratri3", name: "🌺 Shardiya Navratri - Day 3 (Maa Chandraghanta)", title: "Maa Chandraghanta", subText: "Shardiya Navratri Day 3", bgGradient: ["#ffcc00", "#ff6600"], textColor: "#000" },
+            { id: "navratri4", name: "🌺 Shardiya Navratri - Day 4 (Maa Kushmanda)", title: "Maa Kushmanda", subText: "Shardiya Navratri Day 4", bgGradient: ["#33cc33", "#006600"], textColor: "#fff" },
+            { id: "navratri5", name: "🌺 Shardiya Navratri - Day 5 (Maa Skandamata)", title: "Maa Skandamata", subText: "Shardiya Navratri Day 5", bgGradient: ["#ffcc00", "#999900"], textColor: "#000" },
+            { id: "navratri6", name: "🌺 Shardiya Navratri - Day 6 (Maa Katyayani)", title: "Maa Katyayani", subText: "Shardiya Navratri Day 6", bgGradient: ["#ff3399", "#660033"], textColor: "#fff" },
+            { id: "navratri7", name: "🌺 Shardiya Navratri - Day 7 (Maa Kalaratri)", title: "Maa Kalaratri", subText: "Shardiya Navratri Day 7", bgGradient: ["#330066", "#000000"], textColor: "#ffd700" },
+            { id: "navratri8", name: "🌺 Shardiya Navratri - Day 8 (Maa Mahagauri / Ashtami)", title: "Maa Mahagauri", subText: "Maha Ashtami Shubhkamnayein", bgGradient: ["#ff99ff", "#990099"], textColor: "#fff" },
+            { id: "navratri9", name: "🌺 Shardiya Navratri - Day 9 (Maa Siddhidatri / Navami)", title: "Maa Siddhidatri", subText: "Mahanavami & Dussehra ki Shubhkamnayein", bgGradient: ["#ff3300", "#990000"], textColor: "#fff" },
             
-            // Major Festivals
-            { id: "dussehra", name: "🏹 Vijayadashami (Dussehra)", start: "2026-10-20", end: "2026-10-20", title: "Happy Dussehra", subText: "Asatya par Satya ki Jeet", bgGradient: ["#cc0000", "#ff9933"], textColor: "#fff" },
-            { id: "karwa", name: "🌕 Karva Chauth", start: "2026-10-29", end: "2026-10-29", title: "Happy Karva Chauth", subText: "Akhand Saubhagyavati", bgGradient: ["#cc0066", "#660033"], textColor: "#fff" },
-            { id: "diwali", name: "🪔 Diwali (Deepawali)", start: "2026-11-08", end: "2026-11-09", title: "Happy Diwali", subText: "Shubh Deepawali", bgGradient: ["#ff9933", "#cc0000"], textColor: "#fff" },
-            { id: "bhaidooj", name: "🎁 Bhai Dooj", start: "2026-11-10", end: "2026-11-10", title: "Happy Bhai Dooj", subText: "Bhai-Behan ka Prem", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" },
-            { id: "chhath", name: "☀️ Chhath Puja", start: "2026-11-15", end: "2026-11-16", title: "Happy Chhath Puja", subText: "Surya Dev ki Aaradhna", bgGradient: ["#ff6600", "#ffcc00"], textColor: "#000" },
-            { id: "gurunanak", name: "🪯 Guru Nanak Jayanti", start: "2026-11-24", end: "2026-11-24", title: "Guru Nanak Jayanti", subText: "Gurpurab ki Shubhkamnayein", bgGradient: ["#002db3", "#3399ff"], textColor: "#fff" },
-            { id: "christmas", name: "🎄 Christmas", start: "2026-12-25", end: "2026-12-25", title: "Merry Christmas", subText: "Joy to the World", bgGradient: ["#cc0000", "#138808"], textColor: "#fff" },
-            { id: "newyear", name: "🎆 Happy New Year 2027", start: "2027-01-01", end: "2027-01-01", title: "Happy New Year 2027", subText: "Naye Saal ki Shubhkamnayein", bgGradient: ["#000000", "#434343"], textColor: "#ffd700" },
-            { id: "lohri", name: "🔥 Lohri", start: "2027-01-13", end: "2027-01-13", title: "Happy Lohri", subText: "Tyohar Khushiyon Ka", bgGradient: ["#ff3300", "#ff9900"], textColor: "#fff" },
-            { id: "makarsankranti", name: "🪁 Makar Sankranti / Pongal", start: "2027-01-14", end: "2027-01-14", title: "Happy Makar Sankranti", subText: "Patang Utsav ki Shubhkamnayein", bgGradient: ["#0099ff", "#ffff33"], textColor: "#000" },
-            { id: "republic", name: "🇮🇳 Republic Day", start: "2027-01-26", end: "2027-01-26", title: "Republic Day", subText: "Jai Hind 🇮🇳", bgGradient: ["#ff9933", "#138808"], textColor: "#000" },
-            { id: "shivratri", name: "🔱 Maha Shivratri", start: "2027-03-07", end: "2027-03-07", title: "Maha Shivratri", subText: "Har Har Mahadev", bgGradient: ["#000066", "#333333"], textColor: "#ffd700" },
-            { id: "holi", name: "🎨 Holi", start: "2027-03-24", end: "2027-03-25", title: "Happy Holi", subText: "Rangon Ka Tyohar", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" }
+            // Other Major Festivals
+            { id: "dussehra", name: "🏹 Vijayadashami (Dussehra)", title: "Happy Dussehra", subText: "Asatya par Satya ki Jeet", bgGradient: ["#cc0000", "#ff9933"], textColor: "#fff" },
+            { id: "karwa", name: "🌕 Karva Chauth", title: "Happy Karva Chauth", subText: "Akhand Saubhagyavati", bgGradient: ["#cc0066", "#660033"], textColor: "#fff" },
+            { id: "diwali", name: "🪔 Diwali (Deepawali)", title: "Happy Diwali", subText: "Shubh Deepawali", bgGradient: ["#ff9933", "#cc0000"], textColor: "#fff" },
+            { id: "bhaidooj", name: "🎁 Bhai Dooj", title: "Happy Bhai Dooj", subText: "Bhai-Behan ka Prem", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" },
+            { id: "chhath", name: "☀️ Chhath Puja", title: "Happy Chhath Puja", subText: "Surya Dev ki Aaradhna", bgGradient: ["#ff6600", "#ffcc00"], textColor: "#000" },
+            { id: "gurunanak", name: "🪯 Guru Nanak Jayanti", title: "Guru Nanak Jayanti", subText: "Gurpurab ki Shubhkamnayein", bgGradient: ["#002db3", "#3399ff"], textColor: "#fff" },
+            { id: "christmas", name: "🎄 Christmas", title: "Merry Christmas", subText: "Joy to the World", bgGradient: ["#cc0000", "#138808"], textColor: "#fff" },
+            { id: "newyear", name: "🎆 Happy New Year", title: "Happy New Year", subText: "Naye Saal ki Shubhkamnayein", bgGradient: ["#000000", "#434343"], textColor: "#ffd700" },
+            { id: "lohri", name: "🔥 Lohri", title: "Happy Lohri", subText: "Tyohar Khushiyon Ka", bgGradient: ["#ff3300", "#ff9900"], textColor: "#fff" },
+            { id: "makarsankranti", name: "🪁 Makar Sankranti / Pongal", title: "Happy Makar Sankranti", subText: "Patang Utsav ki Shubhkamnayein", bgGradient: ["#0099ff", "#ffff33"], textColor: "#000" },
+            { id: "republic", name: "🇮🇳 Republic Day / Independence Day", title: "Jai Hind", subText: "Desh Bhakti ki Shubhkamnayein", bgGradient: ["#ff9933", "#138808"], textColor: "#000" },
+            { id: "shivratri", name: "🔱 Maha Shivratri", title: "Maha Shivratri", subText: "Har Har Mahadev", bgGradient: ["#000066", "#333333"], textColor: "#ffd700" },
+            { id: "holi", name: "🎨 Holi", title: "Happy Holi", subText: "Rangon Ka Tyohar", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff" },
+            { id: "rakhi", name: "🧵 Raksha Bandhan", title: "Happy Raksha Bandhan", subText: "Bhai-Behan ke Pyar ka Tyohar", bgGradient: ["#003366", "#ff3366"], textColor: "#fff" },
+            { id: "janmashtami", name: "🦚 Shri Krishna Janmashtami", title: "Happy Janmashtami", subText: "Hathi Ghoda Palki, Jai Kanhaiya Lal Ki", bgGradient: ["#000099", "#00cccc"], textColor: "#fff" },
+            { id: "ganesh", name: "モ Ganesh Chaturthi", title: "Happy Ganesh Chaturthi", subText: "Ganpati Bappa Morya", bgGradient: ["#ff6600", "#990000"], textColor: "#fff" },
+            { id: "eid", name: "🌙 Eid-ul-Fitr / Eid al-Adha", title: "Eid Mubarak", subText: "Khushiyon Bhari Eid", bgGradient: ["#006600", "#003300"], textColor: "#ffd700" }
         ];
 
-        // Automatic Festival Filter
-        function loadActiveFestivals() {
+        // Load All Festivals into Dropdown Immediately
+        function loadFestivals() {
             const select = document.getElementById("festivalSelect");
             select.innerHTML = "";
-            const today = new Date();
-            today.setHours(0,0,0,0);
-
-            let activeCount = 0;
 
             festivalsData.forEach(f => {
-                let startDate = new Date(f.start);
-                let endDate = new Date(f.end);
-                
-                let showStartDate = new Date(startDate);
-                showStartDate.setDate(showStartDate.getDate() - 1);
-                showStartDate.setHours(0,0,0,0);
-
-                endDate.setHours(23,59,59,999);
-
-                if (today >= showStartDate && today <= endDate) {
-                    let opt = document.createElement("option");
-                    opt.value = f.id;
-                    opt.textContent = f.name;
-                    select.appendChild(opt);
-                    activeCount++;
-                }
+                let opt = document.createElement("option");
+                opt.value = f.id;
+                opt.textContent = f.name;
+                select.appendChild(opt);
             });
-
-            if (activeCount === 0) {
-                festivalsData.forEach(f => {
-                    let opt = document.createElement("option");
-                    opt.value = f.id;
-                    opt.textContent = f.name + " (" + f.start + ")";
-                    select.appendChild(opt);
-                });
-            }
         }
 
-        window.onload = loadActiveFestivals;
+        window.onload = loadFestivals;
 
         // Monetag Popunder Popup Ad Trigger on Button Click
         function triggerMonetagPopup() {
@@ -159,12 +138,12 @@
                 return;
             }
 
-            // 1. Popup Ad Triggered on Click
+            // Trigger Popup Ad
             triggerMonetagPopup();
 
             const theme = festivalsData.find(f => f.id === festivalKey) || festivalsData[0];
 
-            // 2. Canvas Rendering
+            // Canvas Rendering
             const canvas = document.getElementById("photoCanvas");
             const ctx = canvas.getContext("2d");
 
@@ -208,7 +187,7 @@
             ctx.lineTo(360, 215);
             ctx.stroke();
 
-            // User Name Box / Label
+            // User Name Box
             ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
             ctx.roundRect ? ctx.beginPath(), ctx.roundRect(40, 290, 420, 120, 15), ctx.fill() : ctx.fillRect(40, 290, 420, 120);
 
@@ -254,7 +233,7 @@
                 }
             }
 
-            // Fallback: WhatsApp Direct Link with text and site URL
+            // Fallback: WhatsApp Direct Link
             const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
             window.open(whatsappUrl, '_blank');
         }
