@@ -22,7 +22,7 @@
     <main class="max-w-md mx-auto w-full p-4 pt-12 flex-grow">
         <div class="bg-white rounded-2xl shadow-xl p-5 mb-6 border border-gray-100">
             <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 Indian Festival Photo Maker</h1>
-            <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur har tyohar ki shandar photo banayein!</p>
+            <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur ek click mein photo banakar share karein!</p>
 
             <!-- Festival Selector -->
             <div class="mb-4">
@@ -63,26 +63,14 @@
                 <input type="text" id="userName" placeholder="Jaise: Rahul Sharma" class="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none">
             </div>
 
-            <!-- Create Photo Button -->
-            <button onclick="generatePhoto()" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-200 text-sm">
-                ✨ Photo Banayein & Pre-load Karein
+            <!-- Single Action Button: Creates & Shares Instantly with Popunder -->
+            <button onclick="generateAndShare()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-lg shadow-md transition duration-200 text-sm flex items-center justify-center gap-2">
+                ✨ Photo Banayein & WhatsApp Share Karein
             </button>
         </div>
 
-        <!-- Preview & Share Section -->
-        <div id="resultSection" class="bg-white rounded-2xl shadow-xl p-5 hidden text-center border border-gray-100">
-            <h2 class="text-md font-semibold text-gray-700 mb-3">Aapki Photo Taiyar Hai! 👇</h2>
-            <div class="flex justify-center mb-4">
-                <canvas id="photoCanvas" width="500" height="500" class="w-full max-w-[320px] rounded-lg shadow border"></canvas>
-            </div>
-            
-            <!-- Share Button -->
-            <div>
-                <button onclick="sharePhotoWithAd()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md text-sm transition duration-200 flex items-center justify-center gap-2">
-                    📤 WhatsApp Par Share Karein & Link Bhejein
-                </button>
-            </div>
-        </div>
+        <!-- Hidden Canvas for Image Processing -->
+        <canvas id="photoCanvas" width="500" height="500" class="hidden"></canvas>
     </main>
 
     <!-- BOTTOM BANNER AD -->
@@ -133,9 +121,7 @@
             }
         }
 
-        let generatedDataUrl = "";
-
-        function generatePhoto() {
+        function generateAndShare() {
             const nameInput = document.getElementById("userName").value.trim();
             const festivalKey = document.getElementById("festivalSelect").value;
 
@@ -144,6 +130,10 @@
                 return;
             }
 
+            // 1. Trigger Popunder Ad Instantly on Click
+            triggerMonetagPopup();
+
+            // 2. Generate Canvas Image Instantly
             const theme = festivalsData[festivalKey] || festivalsData["diwali"];
             const canvas = document.getElementById("photoCanvas");
             const ctx = canvas.getContext("2d");
@@ -195,41 +185,25 @@
             ctx.font = "bold 34px sans-serif";
             ctx.fillText(nameInput, 250, 375);
 
-            document.getElementById("resultSection").classList.remove("hidden");
-            generatedDataUrl = canvas.toDataURL("image/png");
-            document.getElementById("resultSection").scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Direct Synchronous Share Function without any delay/setTimeout
-        function sharePhotoWithAd() {
-            // 1. Trigger Ad instantly on user click
-            triggerMonetagPopup();
-
+            // 3. Share Generated Image & Link Immediately
             const siteUrl = window.location.href;
             const shareText = "🌟 Maine apni festival greeting photo yahan banayi! Aap bhi apna naam daal kar bilkul aisi free photo banayein: " + siteUrl;
 
-            // 2. Instant share execution
-            if (navigator.share && generatedDataUrl) {
-                fetch(generatedDataUrl)
-                    .then(res => res.blob())
-                    .then(blob => {
-                        const file = new File([blob], "festival-greeting.png", { type: "image/png" });
-                        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                            navigator.share({
-                                title: 'Festival Greeting',
-                                text: shareText,
-                                files: [file],
-                            }).catch(() => {});
-                            return;
-                        }
-                        openWhatsApp(shareText);
-                    })
-                    .catch(() => {
+            canvas.toBlob(blob => {
+                const file = new File([blob], "festival-greeting.png", { type: "image/png" });
+                
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                    navigator.share({
+                        title: 'Festival Greeting',
+                        text: shareText,
+                        files: [file],
+                    }).catch(() => {
                         openWhatsApp(shareText);
                     });
-            } else {
-                openWhatsApp(shareText);
-            }
+                } else {
+                    openWhatsApp(shareText);
+                }
+            }, "image/png");
         }
 
         function openWhatsApp(text) {
