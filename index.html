@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival Photo Generator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- TOP BANNER AD (Monetag Banner Ad Code Yahan Paste Karein) -->
+    <div class="w-full bg-gray-200 py-2 text-center text-xs text-gray-500 border-b">
+        <!-- Monetag Top Banner Script Start -->
+        <div id="monetag-top-banner">
+            [ Monetag Top Banner Ad Code Here ]
+        </div>
+        <!-- Monetag Top Banner Script End -->
+    </div>
+
+    <!-- Main Container -->
+    <main class="max-w-md mx-auto w-full p-4 flex-grow">
+        <div class="bg-white rounded-2xl shadow-xl p-5 mb-6">
+            <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 Festival Photo Maker</h1>
+            <p class="text-xs text-center text-gray-500 mb-4">Apna naam likhein aur tyohar ki shandar photo banayein!</p>
+
+            <!-- Festival Selector -->
+            <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Tyohar Chunein (Select Festival):</label>
+                <select id="festivalSelect" class="w-full p-2.5 border rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-red-500 outline-none">
+                    <option value="diwali">🪔 Diwali</option>
+                    <option value="holi">🎨 Holi</option>
+                    <option value="rakhi">🧵 Raksha Bandhan</option>
+                    <option value="independence">🇮🇳 Independence Day</option>
+                    <option value="newyear">🎆 New Year</option>
+                </select>
+            </div>
+
+            <!-- User Name Input -->
+            <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Aapka Naam (Your Name):</label>
+                <input type="text" id="userName" placeholder="Jaise: Rahul Sharma" class="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none">
+            </div>
+
+            <!-- Create Photo Button -->
+            <button onclick="generatePhoto()" class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-200 text-sm">
+                ✨ Photo Banayein (Create Photo)
+            </button>
+        </div>
+
+        <!-- Preview & Download Section -->
+        <div id="resultSection" class="bg-white rounded-2xl shadow-xl p-5 hidden text-center">
+            <h2 class="text-md font-semibold text-gray-700 mb-3">Aapki Photo Taiyar Hai! 👇</h2>
+            <div class="flex justify-center mb-4">
+                <!-- Canvas for Generating Image -->
+                <canvas id="photoCanvas" width="500" height="500" class="w-full max-w-[320px] rounded-lg shadow border"></canvas>
+            </div>
+            <a id="downloadBtn" download="festival-greeting.png" class="inline-block w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2.5 rounded-lg shadow-md text-sm transition duration-200">
+                📥 Download Photo
+            </a>
+        </div>
+    </main>
+
+    <!-- BOTTOM BANNER AD (Monetag Banner Ad Code Yahan Paste Karein) -->
+    <div class="w-full bg-gray-200 py-2 text-center text-xs text-gray-500 border-t mt-auto">
+        <!-- Monetag Bottom Banner Script Start -->
+        <div id="monetag-bottom-banner">
+            [ Monetag Bottom Banner Ad Code Here ]
+        </div>
+        <!-- Monetag Bottom Banner Script End -->
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Festival backgrounds and themes data
+        const festivalThemes = {
+            diwali: { title: "Happy Diwali", bgGradient: ["#ff9933", "#cc0000"], textColor: "#fff", subText: "Shubh Deepawali" },
+            holi: { title: "Happy Holi", bgGradient: ["#800080", "#ff00ff"], textColor: "#fff", subText: "Rangon Ka Tyohar" },
+            rakhi: { title: "Happy Raksha Bandhan", bgGradient: ["#002db3", "#3399ff"], textColor: "#fff", subText: "Bhai-Behan ka Pyar" },
+            independence: { title: "Happy Independence Day", bgGradient: ["#ff9933", "#ffffff", "#138808"], textColor: "#000", subText: "Jai Hind 🇮🇳" },
+            newyear: { title: "Happy New Year", bgGradient: ["#000000", "#434343"], textColor: "#ffd700", subText: "Naye Saal ki Shubhkamnayein" }
+        };
+
+        function triggerMonetagPopup() {
+            // Yahan aap apna Monetag Popunder / Interstitial Ad script trigger kar sakte hain.
+            // Example: Jab user button dabaye, toh monetag ka popup code execute ho.
+            console.log("Monetag Popup Ad Triggered!");
+            
+            // Agar aapko Monetag ka popunder script lagana hai, toh uska JS code yahan daal sakte hain.
+        }
+
+        function generatePhoto() {
+            const nameInput = document.getElementById("userName").value.trim();
+            const festivalKey = document.getElementById("festivalSelect").value;
+
+            if (!nameInput) {
+                alert("Kripya apna naam darj karein!");
+                return;
+            }
+
+            // 1. Popup Ad Triggered on Click
+            triggerMonetagPopup();
+
+            // 2. Canvas Rendering
+            const canvas = document.getElementById("photoCanvas");
+            const ctx = canvas.getContext("2d");
+            const theme = festivalThemes[festivalKey];
+
+            // Background Gradient Draw karein
+            let gradient = ctx.createLinearGradient(0, 0, 0, 500);
+            if(festivalKey === 'independence') {
+                gradient = ctx.createLinearGradient(0, 0, 0, 500);
+                gradient.addColorStop(0, "#ff9933");
+                gradient.addColorStop(0.5, "#ffffff");
+                gradient.addColorStop(1, "#138808");
+            } else {
+                gradient.addColorStop(0, theme.bgGradient[0]);
+                gradient.addColorStop(1, theme.bgGradient[1]);
+            }
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 500, 500);
+
+            // Border Design
+            ctx.strokeStyle = "#ffd700";
+            ctx.lineWidth = 15;
+            ctx.strokeRect(10, 10, 480, 480);
+
+            // Festival Title
+            ctx.fillStyle = festivalKey === 'independence' ? '#000' : theme.textColor;
+            ctx.font = "bold 36px sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText(theme.title, 250, 120);
+
+            // Subtext
+            ctx.font = "20px sans-serif";
+            ctx.fillText(theme.subText, 250, 170);
+
+            // Decorative line
+            ctx.strokeStyle = "#ffd700";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(150, 200);
+            ctx.lineTo(350, 200);
+            ctx.stroke();
+
+            // User Name Box / Label
+            ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+            ctx.fillRect(50, 300, 400, 100);
+
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "18px sans-serif";
+            ctx.fillText("Courtesy / Shubhkamnayein:", 250, 335);
+
+            ctx.fillStyle = "#ffd700";
+            ctx.font = "bold 32px sans-serif";
+            ctx.fillText(nameInput, 250, 375);
+
+            // Show Result Section
+            document.getElementById("resultSection").classList.remove("hidden");
+
+            // Set Download Link
+            const downloadBtn = document.getElementById("downloadBtn");
+            downloadBtn.href = canvas.toDataURL("image/png");
+            
+            // Scroll to result
+            document.getElementById("resultSection").scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
