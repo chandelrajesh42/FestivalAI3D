@@ -10,10 +10,13 @@
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Ad Script 1 -->
+    <script src="https://quge5.com/88/tag.min.js" data-zone="286016" async data-cfasync="false"></script>
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col justify-between">
 
-    <!-- TOP BANNER AD (Fixed with safe top spacing) -->
+    <!-- TOP BANNER AD 1 (Fixed with safe top spacing) -->
     <div class="w-full bg-white py-1 text-center border-b shadow-sm fixed top-0 z-50">
         <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
@@ -22,7 +25,7 @@
     <main class="max-w-md mx-auto w-full p-4 pt-16 flex-grow">
         <div class="bg-white rounded-2xl shadow-xl p-5 mb-6 border border-red-100">
             <h1 class="text-xl font-bold text-center text-red-600 mb-1">🎉 festivalAI3d Photo Maker</h1>
-            <p class="text-xs text-center text-gray-500 mb-4">Navratri ke 9 roopo aur sabhi tyoharon ki shandar photo banayein!</p>
+            <p class="text-xs text-center text-gray-500 mb-4">9 Navratri roopo aur sabhi tyoharon ki shandar decorated photo banayein!</p>
 
             <!-- Festival & Navratri Selector -->
             <div class="mb-4">
@@ -35,7 +38,7 @@
             <!-- User Name Input -->
             <div class="mb-4">
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Aapka Naam (Your Name):</label>
-                <input type="text" id="userName" placeholder="Jaise: Rajesh Kumar" class="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                <input type="text" id="userName" placeholder="Apna Naam Likhein" class="w-full p-2.5 border rounded-lg text-sm focus:ring-2 focus:ring-red-500 outline-none">
             </div>
 
             <!-- Create Photo Button -->
@@ -52,19 +55,16 @@
                 <canvas id="photoCanvas" width="500" height="500" class="w-full max-w-[300px] rounded-lg shadow-lg border-2 border-amber-400"></canvas>
             </div>
             
-            <!-- Share & Download Buttons -->
+            <!-- Share Button -->
             <div class="space-y-3">
                 <button onclick="sharePhotoWithAd()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md text-sm transition duration-200 flex items-center justify-center gap-2">
                     📤 WhatsApp Par Photo Share Karein
                 </button>
-                <a id="downloadBtn" download="festivalAI3d-greeting.png" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg shadow-md text-sm transition duration-200 text-center">
-                    📥 Photo Download Karein
-                </a>
             </div>
         </div>
     </main>
 
-    <!-- BOTTOM BANNER AD -->
+    <!-- BOTTOM BANNER AD 2 -->
     <div class="w-full bg-white py-1 text-center border-t shadow-sm mt-auto">
         <script>(function(s){s.dataset.zone='11829771',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     </div>
@@ -72,35 +72,35 @@
     <!-- JavaScript Logic & Complete Festivals & Navratri Database -->
     <script>
         const festivalsData = [
-            // 9 Navratri Days
-            { id: "navratri1", name: "🌺 Navratri Day 1 - Maa Shailputri", title: "Maa Shailputri", subText: "Prathama Navratra Shubhkamnayein", bgGradient: ["#b8860b", "#ff8c00"], textColor: "#fff", symbol: "🌺 🪔" },
-            { id: "navratri2", name: "🌿 Navratri Day 2 - Maa Brahmacharini", title: "Maa Brahmacharini", subText: "Dvitiya Navratra Shubhkamnayein", bgGradient: ["#006400", "#228b22"], textColor: "#fff", symbol: "🌿 🪔" },
-            { id: "navratri3", name: "🌙 Navratri Day 3 - Maa Chandraghanta", title: "Maa Chandraghanta", subText: "Tritiya Navratra Shubhkamnayein", bgGradient: ["#483d8b", "#6a5acd"], textColor: "#fff", symbol: "🌙 🪔" },
-            { id: "navratri4", name: "☀️ Navratri Day 4 - Maa Kushmanda", title: "Maa Kushmanda", subText: "Chaturthi Navratra Shubhkamnayein", bgGradient: ["#ff4500", "#ff8c00"], textColor: "#fff", symbol: "☀️ 🪔" },
-            { id: "navratri5", name: "👶 Navratri Day 5 - Maa Skandamata", title: "Maa Skandamata", subText: "Panchami Navratra Shubhkamnayein", bgGradient: ["#8b0000", "#dc143c"], textColor: "#fff", symbol: "👶 🪔" },
-            { id: "navratri6", name: "⚔️ Navratri Day 6 - Maa Katyayani", title: "Maa Katyayani", subText: "Shashthi Navratra Shubhkamnayein", bgGradient: ["#b22222", "#ff4500"], textColor: "#fff", symbol: "⚔️ 🪔" },
-            { id: "navratri7", name: "⚡ Navratri Day 7 - Maa Kalaratri", title: "Maa Kalaratri", subText: "Saptami Navratra Shubhkamnayein", bgGradient: ["#00008b", "#191970"], textColor: "#ffd700", symbol: "⚡ 🪔" },
-            { id: "navratri8", name: "🌸 Navratri Day 8 - Maa Mahagauri (Ashtami)", title: "Maa Mahagauri", subText: "Durga Ashtami & Kanya Pujan", bgGradient: ["#ff1493", "#ff69b4"], textColor: "#fff", symbol: "🌸 🪔" },
-            { id: "navratri9", name: "🔱 Navratri Day 9 - Maa Siddhidatri (Navami)", title: "Maa Siddhidatri", subText: "Maha Navami Shubhkamnayein", bgGradient: ["#800080", "#9932cc"], textColor: "#ffd700", symbol: "🔱 🪔" },
+            // 9 Navratri Days with specific Goddess names and details
+            { id: "navratri1", name: "🌺 Navratri Day 1 - Maa Shailputri", category: "navratri", title: "Maa Shailputri", subText: "Prathama Navratra - Vrishabh Vaahana", symbol: "🌺 🔱", mata: "Maa Shailputri (शैल पुत्री)" },
+            { id: "navratri2", name: "🌿 Navratri Day 2 - Maa Brahmacharini", category: "navratri", title: "Maa Brahmacharini", subText: "Dvitiya Navratra - Tapascharini", symbol: "🌿 🪔", mata: "Maa Brahmacharini (ब्रह्मचारिणी)" },
+            { id: "navratri3", name: "🌙 Navratri Day 3 - Maa Chandraghanta", category: "navratri", title: "Maa Chandraghanta", subText: "Tritiya Navratra - Simha Vaahana", symbol: "🌙 🐅", mata: "Maa Chandraghanta (चंद्रघंटा)" },
+            { id: "navratri4", name: "☀️ Navratri Day 4 - Maa Kushmanda", category: "navratri", title: "Maa Kushmanda", subText: "Chaturthi Navratra - Brahmanda Srijan", symbol: "☀️ 🪷", mata: "Maa Kushmanda (कूष्मांडा)" },
+            { id: "navratri5", name: "👶 Navratri Day 5 - Maa Skandamata", category: "navratri", title: "Maa Skandamata", subText: "Panchami Navratra - Skanda Mata", symbol: "👶 🦁", mata: "Maa Skandamata (स्कंदमाता)" },
+            { id: "navratri6", name: "⚔️ Navratri Day 6 - Maa Katyayani", category: "navratri", title: "Maa Katyayani", subText: "Shashthi Navratra - Mahishasurmardini", symbol: "⚔️ 🛡️", mata: "Maa Katyayani (कात्यायनी)" },
+            { id: "navratri7", name: "⚡ Navratri Day 7 - Maa Kalaratri", category: "navratri", title: "Maa Kalaratri", subText: "Saptami Navratra - Shubhamkari", symbol: "⚡ 🔥", mata: "Maa Kalaratri (कालरात्रि)" },
+            { id: "navratri8", name: "🌸 Navratri Day 8 - Maa Mahagauri", category: "navratri", title: "Maa Mahagauri", subText: "Ashtami Navratra - Kanya Pujan", symbol: "🌸 🪔", mata: "Maa Mahagauri (महागauri)" },
+            { id: "navratri9", name: "🔱 Navratri Day 9 - Maa Siddhidatri", category: "navratri", title: "Maa Siddhidatri", subText: "Maha Navami - Sarva Siddhi Daayani", symbol: "🔱 ✨", mata: "Maa Siddhidatri (सिद्धिदात्री)" },
 
             // Other Major Indian Festivals
-            { id: "dussehra", name: "🏹 Dussehra (Vijayadashami)", title: "Happy Dussehra", subText: "Asatya par Satya ki Vijay", bgGradient: ["#cc0000", "#ff6600"], textColor: "#fff", symbol: "🏹 🔥" },
-            { id: "karwachauth", name: "🌕 Karwa Chauth", title: "Happy Karwa Chauth", subText: "Akhand Saubhagya Vrat", bgGradient: ["#800020", "#ff1493"], textColor: "#ffd700", symbol: "🌕 💍" },
-            { id: "dhanteras", name: "🪙 Dhanteras", title: "Happy Dhanteras", subText: "Kuber Dev & Laxmi Pujan", bgGradient: ["#b8860b", "#ffd700"], textColor: "#000", symbol: "🪙 🪔" },
-            { id: "diwali", name: "🪔 Diwali (Deepawali)", title: "Happy Diwali", subText: "Shubh Deepawali & Laxmi Kripa", bgGradient: ["#ff4500", "#ff8c00"], textColor: "#ffd700", symbol: "🪔 ✨" },
-            { id: "bhaidooj", name: "🎁 Bhai Dooj", title: "Happy Bhai Dooj", subText: "Bhai-Behan ke Prem ka Tyohar", bgGradient: ["#800080", "#da70d6"], textColor: "#fff", symbol: "🎁 🤝" },
-            { id: "chhath", name: "🌅 Chhath Puja", title: "Happy Chhath Puja", subText: "Surya Dev & Chhath Maiya Ki Jai", bgGradient: ["#ff8c00", "#daa520"], textColor: "#000", symbol: "🌅 🥥" },
-            { id: "gurunanak", name: "🪯 Guru Nanak Jayanti", title: "Gurpurab Vadhai", subText: "Guru Nanak Dev Ji Jayanti", bgGradient: ["#00008b", "#1e90ff"], textColor: "#ffd700", symbol: "ੴ ✨" },
-            { id: "christmas", name: "🎄 Christmas", title: "Merry Christmas", subText: "Joy to the World & Santa Blessings", bgGradient: ["#8b0000", "#006400"], textColor: "#fff", symbol: "🎄 🎅" },
-            { id: "newyear", name: "🎆 New Year 2027", title: "Happy New Year 2027", subText: "Naye Saal ki Hardik Shubhkamnayein", bgGradient: ["#111111", "#333333"], textColor: "#ffd700", symbol: "🎆 🎉" },
-            { id: "sankranti", name: "🪁 Makar Sankranti / Pongal", title: "Happy Makar Sankranti", subText: "Til Gul Ghod God Bola", bgGradient: ["#ff8c00", "#ffd700"], textColor: "#000", symbol: "🪁 🌾" },
-            { id: "republic", name: "🇮🇳 Republic Day", title: "Happy Republic Day", subText: "Jai Hind - Vande Mataram", bgGradient: ["#ff9933", "#ffffff", "#138808"], textColor: "#000", symbol: "🇮🇳 🦚" },
-            { id: "shivratri", name: "🔱 Maha Shivratri", title: "Happy Maha Shivratri", subText: "Om Namah Shivaya - Har Har Mahadev", bgGradient: ["#2f4f4f", "#111111"], textColor: "#00ffff", symbol: "🔱 🐍" },
-            { id: "holi", name: "🎨 Holi", title: "Happy Holi", subText: "Rangon Ka Tyohar - Bura Na Mano Holi Hai", bgGradient: ["#800080", "#ff1493"], textColor: "#fff", symbol: "🎨 💧" },
-            { id: "ramnavami", name: "🏹 Ram Navami", title: "Happy Ram Navami", subText: "Jai Siya Ram - Maryada Purushottam", bgGradient: ["#ff8c00", "#ff4500"], textColor: "#ffd700", symbol: "🏹 🚩" },
-            { id: "rakhi", name: "🧵 Raksha Bandhan", title: "Happy Raksha Bandhan", subText: "Bhai Behan ka Pavan Tyohar", bgGradient: ["#ff1493", "#800080"], textColor: "#fff", symbol: "🧵 💖" },
-            { id: "janmashtami", name: "🦚 Krishna Janmashtami", title: "Happy Janmashtami", subText: "Hathi Ghoda Palki, Jai Kanhaiya Lal Ki", bgGradient: ["#00008b", "#4169e1"], textColor: "#ffd700", symbol: "🦚 🪈" },
-            { id: "ganesh", name: "🐘 Ganesh Chaturthi", title: "Happy Ganesh Chaturthi", subText: "Ganpati Bappa Morya, Mangal Murti Morya", bgGradient: ["#ff8c00", "#ff4500"], textColor: "#ffd700", symbol: "🐘 🍬" }
+            { id: "dussehra", name: "🏹 Dussehra (Vijayadashami)", category: "navratri", title: "Happy Dussehra", subText: "Asatya par Satya ki Vijay", symbol: "🏹 🔥", mata: "Vijayadashami Utsav" },
+            { id: "diwali", name: "🪔 Diwali (Deepawali)", category: "diwali", title: "Happy Diwali", subText: "Festival of Lights - Shubh Deepawali", symbol: "🪔 ✨", mata: "Maa Laxmi & Shri Ganesha" },
+            { id: "dhanteras", name: "🪙 Dhanteras", category: "diwali", title: "Happy Dhanteras", subText: "Kuber Dev & Laxmi Pujan", symbol: "🪙 🪔", mata: "Dhanvantari & Kuber Dev" },
+            { id: "karwachauth", name: "🌕 Karwa Chauth", category: "diwali", title: "Happy Karwa Chauth", subText: "Akhand Saubhagya Vrat", symbol: "🌕 💍", mata: "Karwa Mata Vrat" },
+            { id: "bhaidooj", name: "🎁 Bhai Dooj", category: "general", title: "Happy Bhai Dooj", subText: "Bhai-Behan ke Prem ka Tyohar", symbol: "🎁 🤝", mata: "Yamraj & Yamuna Sneha" },
+            { id: "chhath", name: "🌅 Chhath Puja", category: "diwali", title: "Happy Chhath Puja", subText: "Surya Dev & Chhath Maiya Ki Jai", symbol: "🌅 🥥", mata: "Chhath Maiya & Surya Dev" },
+            { id: "gurunanak", name: "🪯 Guru Nanak Jayanti", category: "general", title: "Gurpurab Vadhai", subText: "Guru Nanak Dev Ji Jayanti", symbol: "ੴ ✨", mata: "Guru Nanak Dev Ji" },
+            { id: "christmas", name: "🎄 Christmas", category: "general", title: "Merry Christmas", subText: "Joy to the World & Santa Blessings", symbol: "🎄 🎅", mata: "Santa Claus Blessings" },
+            { id: "newyear", name: "🎆 New Year 2027", category: "diwali", title: "Happy New Year 2027", subText: "Naye Saal ki Hardik Shubhkamnayein", symbol: "🎆 🎉", mata: "Nav Varsh 2027" },
+            { id: "sankranti", name: "🪁 Makar Sankranti / Pongal", category: "general", title: "Happy Makar Sankranti", subText: "Til Gul Ghod God Bola", symbol: "🪁 🌾", mata: "Surya Uttarayan Utsav" },
+            { id: "republic", name: "🇮🇳 Republic Day", category: "republic", title: "Happy Republic Day", subText: "Jai Hind - Vande Mataram", symbol: "🇮🇳 🦚", mata: "Bharat Mata Ki Jai" },
+            { id: "shivratri", name: "🔱 Maha Shivratri", category: "diwali", title: "Happy Maha Shivratri", subText: "Om Namah Shivaya - Har Har Mahadev", symbol: "🔱 🐍", mata: "Bholenath Shiv Shankar" },
+            { id: "holi", name: "🎨 Holi", category: "general", title: "Happy Holi", subText: "Rangon Ka Tyohar - Bura Na Mano Holi Hari", symbol: "🎨 💧", mata: "Rangotsav Holi" },
+            { id: "ramnavami", name: "🏹 Ram Navami", category: "navratri", title: "Happy Ram Navami", subText: "Jai Siya Ram - Maryada Purushottam", symbol: "🏹 🚩", mata: "Bhagwan Shri Ram" },
+            { id: "rakhi", name: "🧵 Raksha Bandhan", category: "general", title: "Happy Raksha Bandhan", subText: "Bhai Behan ka Pavan Tyohar", symbol: "🧵 💖", mata: "Raksha Bandhan Sneha" },
+            { id: "janmashtami", name: "🦚 Krishna Janmashtami", category: "diwali", title: "Happy Janmashtami", subText: "Hathi Ghoda Palki, Jai Kanhaiya Lal Ki", symbol: "🦚 🪈", mata: "Shri Krishna Janmotsav" },
+            { id: "ganesh", name: "🐘 Ganesh Chaturthi", category: "general", title: "Happy Ganesh Chaturthi", subText: "Ganpati Bappa Morya, Mangal Murti Morya", symbol: "🐘 🍬", mata: "Shri Ganesha" }
         ];
 
         // Populate Festival Dropdown
@@ -117,19 +117,19 @@
 
         window.onload = loadFestivals;
 
-        // Monetag Popunder Popup Ad Trigger (Zone: 11829758)
-        function triggerMonetagPopup() {
+        // Monetag Popunder Popup Ad Trigger
+        function triggerMonetagPopups() {
             try {
-                const s = document.createElement('script');
-                s.dataset.zone = '11829758';
-                s.src = 'https://al5sm.com/tag.min.js';
-                document.body.appendChild(s);
+                const s1 = document.createElement('script');
+                s1.dataset.zone = '11829758';
+                s1.src = 'https://al5sm.com/tag.min.js';
+                document.body.appendChild(s1);
             } catch (e) {
-                console.log("Popunder error", e);
+                console.log("Popup ad error", e);
             }
         }
 
-        // Generate Decorated Canvas Photo
+        // Generate Decorated Canvas Photo with Specific Navratri Mata details & graphics
         function generatePhoto() {
             const nameInput = document.getElementById("userName").value.trim();
             const festivalKey = document.getElementById("festivalSelect").value;
@@ -143,126 +143,233 @@
             const canvas = document.getElementById("photoCanvas");
             const ctx = canvas.getContext("2d");
 
-            // 1. Rich Gradient Background
-            let gradient = ctx.createLinearGradient(0, 0, 0, 500);
-            if(festivalKey === 'republic') {
-                gradient.addColorStop(0, "#ff9933");
-                gradient.addColorStop(0.5, "#ffffff");
-                gradient.addColorStop(1, "#138808");
+            ctx.clearRect(0, 0, 500, 500);
+
+            // 1. Theme Background Styling
+            if (theme.category === 'diwali') {
+                let bgGrad = ctx.createLinearGradient(0, 0, 0, 500);
+                bgGrad.addColorStop(0, "#051630");
+                bgGrad.addColorStop(0.5, "#0b2545");
+                bgGrad.addColorStop(1, "#13315c");
+                ctx.fillStyle = bgGrad;
+                ctx.fillRect(0, 0, 500, 500);
+
+                drawBokehCircles(ctx);
+                drawMandalaBase(ctx, 250, 360, 180, "#1d4ed8", "#60a5fa");
+                drawDiya(ctx, 250, 290);
+
+            } else if (theme.category === 'navratri') {
+                // Rich divine orange/gold background for Navratri days
+                let bgGrad = ctx.createLinearGradient(0, 0, 0, 500);
+                bgGrad.addColorStop(0, "#802b00");
+                bgGrad.addColorStop(0.5, "#b33c00");
+                bgGrad.addColorStop(1, "#e64d00");
+                ctx.fillStyle = bgGrad;
+                ctx.fillRect(0, 0, 500, 500);
+
+                drawMandalaOverlay(ctx);
+                drawMarigoldGarlands(ctx);
+
+                // Specific Divine Goddess Circle Emblem in Center
+                ctx.save();
+                ctx.fillStyle = "rgba(0, 0, 0, 0.45)";
+                ctx.beginPath();
+                ctx.arc(250, 240, 75, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "#ffd700";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                ctx.restore();
+
+                // Draw Goddess Symbol/Icon inside circle
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "38px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText(theme.symbol.split(" ")[1] || "🔱", 250, 252);
+
+            } else if (theme.category === 'republic') {
+                let bgGrad = ctx.createLinearGradient(0, 0, 0, 500);
+                bgGrad.addColorStop(0, "#ff9933");
+                bgGrad.addColorStop(0.5, "#ffffff");
+                bgGrad.addColorStop(1, "#138808");
+                ctx.fillStyle = bgGrad;
+                ctx.fillRect(0, 0, 500, 500);
             } else {
-                gradient.addColorStop(0, theme.bgGradient[0]);
-                gradient.addColorStop(1, theme.bgGradient[1]);
+                let bgGrad = ctx.createLinearGradient(0, 0, 0, 500);
+                bgGrad.addColorStop(0, "#4a044e");
+                bgGrad.addColorStop(0.5, "#701a75");
+                bgGrad.addColorStop(1, "#86198f");
+                ctx.fillStyle = bgGrad;
+                ctx.fillRect(0, 0, 500, 500);
+
+                drawBokehCircles(ctx);
             }
 
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 500, 500);
-
-            // 2. Decorative Outer & Inner Golden Borders
+            // 2. Golden Border Frame
             ctx.strokeStyle = "#ffd700";
-            ctx.lineWidth = 12;
-            ctx.strokeRect(12, 12, 476, 476);
+            ctx.lineWidth = 10;
+            ctx.strokeRect(10, 10, 480, 480);
 
             ctx.strokeStyle = "#ffffff";
             ctx.lineWidth = 2;
-            ctx.strokeRect(22, 22, 456, 456);
+            ctx.strokeRect(18, 18, 464, 464);
 
-            // Corner Flower Ornaments
             drawCornerOrnaments(ctx);
 
-            // 3. Festival Symbol Header
-            ctx.font = "38px sans-serif";
+            // 3. Header & Specific Mata Name
+            ctx.font = "28px sans-serif";
             ctx.textAlign = "center";
-            ctx.fillText(theme.symbol, 250, 75);
+            ctx.fillText(theme.symbol.split(" ")[0] || "🌺", 250, 62);
 
-            // 4. Festival Title
-            ctx.fillStyle = (festivalKey === 'republic') ? '#000' : theme.textColor;
-            ctx.font = "bold 32px sans-serif";
-            ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-            ctx.shadowBlur = 6;
-            ctx.fillText(theme.title, 250, 130);
-
-            // 5. Subtitle
-            ctx.font = "18px sans-serif";
-            ctx.fillText(theme.subText, 250, 170);
-            ctx.shadowBlur = 0; // reset shadow
-
-            // 6. Ornamental Divider Line
-            ctx.strokeStyle = "#ffd700";
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.moveTo(100, 200);
-            ctx.lineTo(400, 200);
-            ctx.stroke();
-
-            // Center decorative sparkle
-            ctx.fillStyle = "#ffd700";
-            ctx.font = "20px sans-serif";
-            ctx.fillText("✦ ✧ ✦ ✧ ✦", 250, 230);
-
-            // 7. User Name Banner Box
-            ctx.fillStyle = "rgba(0, 0, 0, 0.65)";
-            if (ctx.roundRect) {
-                ctx.beginPath();
-                ctx.roundRect(40, 280, 420, 140, 15);
-                ctx.fill();
-            } else {
-                ctx.fillRect(40, 280, 420, 140);
-            }
-            
-            ctx.strokeStyle = "#ffd700";
-            ctx.lineWidth = 3;
-            if (ctx.roundRect) {
-                ctx.beginPath();
-                ctx.roundRect(40, 280, 420, 140, 15);
-                ctx.stroke();
-            } else {
-                ctx.strokeRect(40, 280, 420, 140);
-            }
-
-            // Courtesy Text inside Box
-            ctx.fillStyle = "#ffdf00";
-            ctx.font = "bold 16px sans-serif";
-            ctx.fillText("✨ Shubh Shubhkamnayein ✨", 250, 320);
-
-            ctx.fillStyle = "#ffffff";
-            ctx.font = "14px sans-serif";
-            ctx.fillText("By festivalAI3d / Nivedak:", 250, 345);
-
-            // User Name
-            ctx.fillStyle = "#00ffff";
-            ctx.font = "bold 30px sans-serif";
+            ctx.fillStyle = (theme.category === 'republic') ? '#000' : '#ffffff';
+            ctx.font = "bold 26px sans-serif";
             ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
             ctx.shadowBlur = 8;
-            ctx.fillText(nameInput, 250, 390);
+            ctx.fillText(theme.mata || theme.title, 250, 102);
+
+            // Subtitle / Day Details
+            ctx.font = "15px sans-serif";
+            ctx.fillStyle = "#ffd700";
+            ctx.fillText(theme.subText, 250, 130);
             ctx.shadowBlur = 0;
+
+            // 4. User Greeting Banner Box at bottom
+            ctx.fillStyle = "rgba(0, 0, 0, 0.80)";
+            if (ctx.roundRect) {
+                ctx.beginPath();
+                ctx.roundRect(35, 375, 430, 100, 12);
+                ctx.fill();
+            } else {
+                ctx.fillRect(35, 375, 430, 100);
+            }
+
+            ctx.strokeStyle = "#ffd700";
+            ctx.lineWidth = 2;
+            if (ctx.roundRect) {
+                ctx.beginPath();
+                ctx.roundRect(35, 375, 430, 100, 12);
+                ctx.stroke();
+            } else {
+                ctx.strokeRect(35, 375, 430, 100);
+            }
+
+            // User Name & Watermark inside box
+            ctx.fillStyle = "#ffdf00";
+            ctx.font = "bold 13px sans-serif";
+            ctx.fillText("🌟 Shubh Shubhkamnayein 🌟", 250, 398);
+
+            ctx.fillStyle = "#00ffff";
+            ctx.font = "bold 26px sans-serif";
+            ctx.shadowColor = "rgba(0,0,0,0.9)";
+            ctx.shadowBlur = 6;
+            ctx.fillText(nameInput, 250, 432);
+            ctx.shadowBlur = 0;
+
+            ctx.fillStyle = "#cbd5e1";
+            ctx.font = "11px sans-serif";
+            ctx.fillText("festivalAI3d.com | Aap bhi aisi photo banayein", 250, 458);
 
             // Show Result Section
             document.getElementById("resultSection").classList.remove("hidden");
-            const dataUrl = canvas.toDataURL("image/png");
-            document.getElementById("downloadBtn").href = dataUrl;
             document.getElementById("resultSection").scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Helper to draw corners
-        function drawCornerOrnaments(ctx) {
-            ctx.fillStyle = "#ffd700";
-            ctx.fillRect(10, 10, 25, 8);
-            ctx.fillRect(10, 10, 8, 25);
-            ctx.fillRect(465, 10, 25, 8);
-            ctx.fillRect(482, 10, 8, 25);
-            ctx.fillRect(10, 482, 25, 8);
-            ctx.fillRect(10, 465, 8, 25);
-            ctx.fillRect(465, 482, 25, 8);
-            ctx.fillRect(482, 465, 8, 25);
+        // Helper Canvas Drawings
+        function drawBokehCircles(ctx) {
+            const colors = ["rgba(255, 215, 0, 0.3)", "rgba(255, 255, 255, 0.2)", "rgba(255, 140, 0, 0.25)"];
+            for (let i = 0; i < 25; i++) {
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.beginPath();
+                let x = Math.random() * 500;
+                let y = Math.random() * 500;
+                let r = Math.random() * 20 + 5;
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        // Share Function with Web Share API (Shares Image + Text directly to WhatsApp)
+        function drawMandalaBase(ctx, cx, cy, radius, color1, color2) {
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.strokeStyle = color2;
+            ctx.lineWidth = 3;
+            for (let i = 0; i < 16; i++) {
+                ctx.beginPath();
+                ctx.arc(0, 0, radius, (i * Math.PI) / 8, ((i + 0.5) * Math.PI) / 8);
+                ctx.stroke();
+            }
+            ctx.fillStyle = color1;
+            ctx.beginPath();
+            ctx.arc(0, 0, radius * 0.7, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function drawDiya(ctx, x, y) {
+            ctx.fillStyle = "#1e40af";
+            ctx.beginPath();
+            ctx.ellipse(x, y + 15, 55, 25, 0, 0, Math.PI);
+            ctx.fill();
+            ctx.strokeStyle = "#ffd700";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            let grad = ctx.createRadialGradient(x, y - 20, 2, x, y - 20, 25);
+            grad.addColorStop(0, "#ffffff");
+            grad.addColorStop(0.4, "#facc15");
+            grad.addColorStop(1, "#ea580c");
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.moveTo(x, y - 45);
+            ctx.quadraticCurveTo(x + 18, y - 20, x, y - 5);
+            ctx.quadraticCurveTo(x - 18, y - 20, x, y - 45);
+            ctx.fill();
+        }
+
+        function drawMarigoldGarlands(ctx) {
+            ctx.fillStyle = "#ff8c00";
+            for (let x = 15; x < 490; x += 25) {
+                ctx.beginPath();
+                ctx.arc(x, 25, 12, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = "#ffd700";
+                ctx.beginPath();
+                ctx.arc(x, 25, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = "#ff8c00";
+            }
+        }
+
+        function drawMandalaOverlay(ctx) {
+            ctx.strokeStyle = "rgba(255, 215, 0, 0.15)";
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.arc(250, 250, 180, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(250, 250, 120, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        function drawCornerOrnaments(ctx) {
+            ctx.fillStyle = "#ffd700";
+            ctx.fillRect(8, 8, 30, 8);
+            ctx.fillRect(8, 8, 8, 30);
+            ctx.fillRect(462, 8, 30, 8);
+            ctx.fillRect(484, 8, 8, 30);
+            ctx.fillRect(8, 484, 30, 8);
+            ctx.fillRect(8, 462, 8, 30);
+            ctx.fillRect(462, 484, 30, 8);
+            ctx.fillRect(484, 462, 8, 30);
+        }
+
+        // WhatsApp Share with site link and call to action
         async function sharePhotoWithAd() {
-            triggerMonetagPopup();
+            triggerMonetagPopups();
 
             const canvas = document.getElementById("photoCanvas");
             const siteUrl = window.location.href;
-            const shareText = "🌟 Maine apni tyohar ki shandar greeting photo festivalAI3d par banayi! Aap bhi apna naam daal kar bilkul aisi free photo banayein:\n" + siteUrl;
+            const shareText = "🌟 Maine apni tyohar ki shandar greeting photo festivalAI3d par banayi! Aap bhi aisi photo bnayen:\n" + siteUrl;
 
             canvas.toBlob(async (blob) => {
                 const file = new File([blob], "festival-greeting.png", { type: "image/png" });
@@ -280,16 +387,8 @@
                     }
                 }
 
-                // Fallback for browsers not supporting direct file sharing
-                const link = document.createElement('a');
-                link.download = 'festival-greeting.png';
-                link.href = canvas.toDataURL("image/png");
-                link.click();
-
-                setTimeout(() => {
-                    const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
-                    window.open(whatsappUrl, '_blank');
-                }, 800);
+                const whatsappUrl = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText);
+                window.open(whatsappUrl, '_blank');
             }, 'image/png');
         }
     </script>
